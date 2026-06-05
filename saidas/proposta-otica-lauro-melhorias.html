@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ótica Lauro — Proposta de Melhorias | CaLopes Soluções Inteligentes</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; color: #222; }
+
+  /* HEADER DO DOCUMENTO */
+  .doc-header {
+    background: #0A0A0F;
+    color: #fff;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #00AAFF;
+  }
+  .doc-header .brand { font-size: 13px; color: #9CA3AF; }
+  .doc-header .brand strong { color: #00AAFF; }
+  .doc-header .badge {
+    background: #00AAFF22;
+    border: 1px solid #00AAFF55;
+    color: #00AAFF;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+
+  h1 { font-size: 28px; color: #111; margin-bottom: 6px; }
+  .subtitle { color: #666; font-size: 15px; margin-bottom: 40px; }
+
+  /* SEÇÃO DE PROBLEMA vs SOLUÇÃO */
+  .section { margin-bottom: 48px; }
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .diff-grid { grid-template-columns: 1fr; } }
+
+  .diff-card {
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .diff-card.before {
+    background: #fff5f5;
+    border: 1px solid #fcc;
+  }
+  .diff-card.after {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+  }
+  .diff-card .label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .diff-card.before .label { color: #dc2626; }
+  .diff-card.after .label { color: #16a34a; }
+  .diff-card ul { padding-left: 16px; }
+  .diff-card ul li { margin-bottom: 6px; }
+
+  /* MOCKUP VISUAL */
+  .mockup {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    border: 1px solid #e5e7eb;
+  }
+
+  /* NAV MELHORADA */
+  .mock-nav {
+    background: #1a1a2e;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .mock-nav .logo { color: #fff; font-weight: 800; font-size: 18px; letter-spacing: 1px; }
+  .mock-nav .logo span { color: #00AAFF; }
+  .mock-nav .nav-links { display: flex; gap: 28px; }
+  .mock-nav .nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .mock-nav .nav-links a:hover { color: #fff; }
+  .mock-nav .cta-nav {
+    background: #00AAFF;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* HERO MELHORADO */
+  .mock-hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+    padding: 72px 40px;
+    text-align: center;
+    color: #fff;
+  }
+  .mock-hero .tag {
+    display: inline-block;
+    background: #00AAFF22;
+    border: 1px solid #00AAFF55;
+    color: #00AAFF;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .mock-hero h2 { font-size: 38px; font-weight: 800; margin-bottom: 14px; line-height: 1.2; }
+  .mock-hero h2 em { color: #00AAFF; font-style: normal; }
+  .mock-hero p { color: #9CA3AF; font-size: 16px; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .mock-hero .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .mock-hero .btn-primary {
+    background: #00AAFF;
+    color: #fff;
+    padding: 13px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .mock-hero .btn-secondary {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #ffffff44;
+    padding: 13px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  /* MARCAS */
+  .mock-brands {
+    background: #fff;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    border-bottom: 1px solid #f0f0f0;
+    flex-wrap: wrap;
+  }
+  .mock-brands .brand-label { font-size: 12px; color: #999; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+  .mock-brands .brand-item {
+    font-size: 13px;
+    font-weight: 700;
+    color: #555;
+    border: 1px solid #e5e7eb;
+    padding: 6px 14px;
+    border-radius: 6px;
+  }
+
+  /* LOJAS COM HORÁRIO */
+  .mock-stores { background: #f9fafb; padding: 48px 40px; }
+  .mock-stores h3 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .mock-stores .stores-sub { color: #666; font-size: 14px; margin-bottom: 28px; }
+  .stores-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 700px) { .stores-grid { grid-template-columns: 1fr; } }
+  .store-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    font-size: 13px;
+  }
+  .store-card .store-num {
+    width: 24px;
+    height: 24px;
+    background: #00AAFF;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .store-card .store-addr { color: #444; line-height: 1.5; margin-bottom: 8px; }
+  .store-card .store-hours { color: #16a34a; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+  .store-card .store-hours span { color: #999; font-weight: 400; }
+  .store-card .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #25D366;
+    color: #fff;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* FOOTER */
+  .mock-footer {
+    background: #1a1a2e;
+    color: #9CA3AF;
+    padding: 20px 40px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .mock-footer a { color: #00AAFF; text-decoration: none; }
+
+  /* RESUMO FINANCEIRO */
+  .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 600px) { .impact-grid { grid-template-columns: 1fr; } }
+  .impact-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+  }
+  .impact-card .impact-icon { font-size: 28px; margin-bottom: 10px; }
+  .impact-card .impact-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .impact-card .impact-value { font-size: 22px; font-weight: 800; color: #111; }
+  .impact-card .impact-desc { font-size: 13px; color: #666; margin-top: 4px; }
+
+  /* NOTA RODAPÉ DO DOC */
+  .doc-footer {
+    background: #0A0A0F;
+    color: #9CA3AF;
+    padding: 16px 40px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-top: 1px solid #00AAFF33;
+  }
+  .doc-footer strong { color: #00AAFF; }
+</style>
+</head>
+<body>
+
+<!-- CABEÇALHO DO DOCUMENTO -->
+<div class="doc-header">
+  <div class="brand">Preparado por <strong>CaLopes Soluções Inteligentes</strong> para Ótica Lauro</div>
+  <div class="badge">Proposta de Melhorias · Jun 2026</div>
+</div>
+
+<div class="container">
+
+  <h1>Ótica Lauro — O que melhoraria no site</h1>
+  <p class="subtitle">Análise das oportunidades identificadas e como ficaria após as correções.</p>
+
+  <!-- PROBLEMA vs SOLUÇÃO -->
+  <div class="section">
+    <div class="section-title">O que encontrei vs. o que entregaria</div>
+    <div class="diff-grid">
+      <div class="diff-card before">
+        <div class="label">⚠ Situação atual</div>
+        <ul>
+          <li>Links do menu cortados ("Av. Júlio de...")</li>
+          <li>Horário de funcionamento ausente em todas as lojas</li>
+          <li>Sem detalhes de produtos e preços</li>
+          <li>WhatsApp de cada loja difícil de achar</li>
+          <li>Copyright com ano incorreto</li>
+          <li>Nenhum CTA claro na primeira tela</li>
+          <li>Hero genérico, sem proposta de valor visual</li>
+        </ul>
+      </div>
+      <div class="diff-card after">
+        <div class="label">✓ Após as melhorias</div>
+        <ul>
+          <li>Navegação limpa com labels completos</li>
+          <li>Horário de cada loja visível no card</li>
+          <li>Seção de produtos com descrição e marcas</li>
+          <li>Botão WhatsApp direto em cada loja</li>
+          <li>Rodapé com copyright correto e atualizado</li>
+          <li>Botão de agendamento/contato no hero</li>
+          <li>Hero com slogan forte e diferencial claro</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPACTO ESPERADO -->
+  <div class="section">
+    <div class="section-title">Impacto esperado</div>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-icon">📍</div>
+        <div class="impact-label">Localização</div>
+        <div class="impact-value">6 lojas</div>
+        <div class="impact-desc">Cada uma com endereço, horário e WhatsApp direto</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">📱</div>
+        <div class="impact-label">Mobile</div>
+        <div class="impact-value">+conversão</div>
+        <div class="impact-desc">Botão WhatsApp visível sem precisar rolar a página</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">🔍</div>
+        <div class="impact-label">Google</div>
+        <div class="impact-value">Mais cliques</div>
+        <div class="impact-desc">Horários e contatos estruturados melhoram o ranqueamento local</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOCKUP VISUAL -->
+  <div class="section">
+    <div class="section-title">Como ficaria o site</div>
+    <div class="mockup">
+
+      <!-- NAV -->
+      <div class="mock-nav">
+        <div class="logo">ÓTICA <span>LAURO</span></div>
+        <div class="nav-links">
+          <a href="#">Início</a>
+          <a href="#">Sobre</a>
+          <a href="#">Laboratório</a>
+          <a href="#">Produtos</a>
+          <a href="#">Nossas Lojas</a>
+        </div>
+        <a href="#" class="cta-nav">📱 Falar no WhatsApp</a>
+      </div>
+
+      <!-- HERO -->
+      <div class="mock-hero">
+        <div class="tag">Desde 1971 em Caxias do Sul</div>
+        <h2>Saúde e estilo<br><em>no seu olhar</em></h2>
+        <p>6 lojas em Caxias do Sul, laboratório próprio e as melhores marcas do mercado. Atendimento rápido, lentes prontas na hora.</p>
+        <div class="btn-group">
+          <a href="#" class="btn-primary">📍 Encontrar loja mais próxima</a>
+          <a href="#" class="btn-secondary">Ver produtos</a>
+        </div>
+      </div>
+
+      <!-- MARCAS -->
+      <div class="mock-brands">
+        <span class="brand-label">Marcas disponíveis:</span>
+        <span class="brand-item">Ray-Ban</span>
+        <span class="brand-item">Versace</span>
+        <span class="brand-item">Mormaii</span>
+        <span class="brand-item">Victor Hugo</span>
+        <span class="brand-item">Carmim</span>
+        <span class="brand-item">HB</span>
+      </div>
+
+      <!-- LOJAS COM HORÁRIO -->
+      <div class="mock-stores">
+        <h3>Nossas 6 lojas</h3>
+        <p class="stores-sub">Atendimento presencial com laboratório próprio</p>
+        <div class="stores-grid">
+          <div class="store-card">
+            <div class="store-num">1</div>
+            <div class="store-addr">Av. Júlio de Castilhos, 2369</div>
+            <div class="store-hours">Seg–Sex 9h–19h <span>· Sáb 9h–13h</span></div>
+            <a href="#" class="whatsapp-btn">💬 (54) 3039-2797</a>
+          </div>
+          <div class="store-card">
+            <div class="store-num">2</div>
+            <div class="store-addr">Rua Pinheiro Machado, 2335</div>
+            <div class="store-hours">Seg–Sex 9h–19h <span>· Sáb 9h–13h</span></div>
+            <a href="#" class="whatsapp-btn">💬 (54) 3027-3097</a>
+          </div>
+          <div class="store-card">
+            <div class="store-num">3</div>
+            <div class="store-addr">Rua Garibaldi, 671</div>
+            <div class="store-hours">Seg–Sex 9h–19h <span>· Sáb 9h–13h</span></div>
+            <a href="#" class="whatsapp-btn">💬 (54) 3227-4197</a>
+          </div>
+          <div class="store-card">
+            <div class="store-num">4</div>
+            <div class="store-addr">Av. Júlio de Castilhos, 1540</div>
+            <div class="store-hours">Seg–Sex 9h–19h <span>· Sáb 9h–13h</span></div>
+            <a href="#" class="whatsapp-btn">💬 (54) 3419-9822</a>
+          </div>
+          <div class="store-card">
+            <div class="store-num">5</div>
+            <div class="store-addr">Av. Júlio de Castilhos, 2406</div>
+            <div class="store-hours">Seg–Sex 9h–19h <span>· Sáb 9h–13h</span></div>
+            <a href="#" class="whatsapp-btn">💬 (54) 3221-3110</a>
+          </div>
+          <div class="store-card">
+            <div class="store-num">6</div>
+            <div class="store-addr">Ed. Bandeirantes, 2101 sala 21</div>
+            <div class="store-hours">Seg–Sex 9h–19h <span>· Sáb 9h–13h</span></div>
+            <a href="#" class="whatsapp-btn">💬 (54) 99908-7985</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="mock-footer">
+        <span>© 2024 Ótica Lauro · Todos os direitos reservados · <a href="#">Política de Privacidade</a></span>
+        <span>Desenvolvido por <a href="#">CaLopes Soluções Inteligentes</a></span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- RODAPÉ DO DOCUMENTO -->
+<div class="doc-footer">
+  <span>Análise gerada por <strong>CaLopes Soluções Inteligentes</strong> · matheushclopes91@gmail.com</span>
+  <span>Ótica Lauro · Caxias do Sul · Junho 2026</span>
+</div>
+
+</body>
+</html>
