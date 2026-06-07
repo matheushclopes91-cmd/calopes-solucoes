@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de ROI — Agente IA WhatsApp</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #13131a;
+    --surface2: #1c1c26;
+    --border: rgba(255,255,255,0.08);
+    --accent: #7c6fef;
+    --accent2: #4fd1a0;
+    --accent3: #f06292;
+    --text: #f0f0f5;
+    --muted: #8888a0;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 0 0 4rem;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 3rem 1.5rem 2rem;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(124,111,239,0.15);
+    border: 1px solid rgba(124,111,239,0.3);
+    color: #a89ef5;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .hero-badge::before { content: "●"; font-size: 8px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+  h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 480px;
+  }
+
+  /* CONTAINER */
+  .container { max-width: 680px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* NICHO TABS */
+  .nichos {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .nicho-btn {
+    padding: 8px 18px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .nicho-btn:hover { border-color: rgba(124,111,239,0.4); color: var(--text); }
+  .nicho-btn.active {
+    background: rgba(124,111,239,0.2);
+    border-color: var(--accent);
+    color: #c4beff;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.25rem;
+  }
+
+  /* SLIDERS */
+  .slider-group { margin-bottom: 1.25rem; }
+  .slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .slider-label { font-size: 14px; color: #cccce0; }
+  .slider-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    background: var(--surface2);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(124,111,239,0.2);
+    transition: box-shadow 0.2s;
+  }
+  input[type=range]:hover::-webkit-slider-thumb { box-shadow: 0 0 0 6px rgba(124,111,239,0.3); }
+
+  /* MÉTRICAS */
+  .metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+  .metric {
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  .metric-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .metric-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .metric-val.green { color: var(--accent2); }
+  .metric-val.purple { color: var(--accent); }
+  .metric-val.red { color: var(--accent3); }
+  .metric-val.white { color: var(--text); }
+  .metric-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* RESULTADO FINAL */
+  .result-card {
+    background: linear-gradient(135deg, rgba(124,111,239,0.15), rgba(79,209,160,0.1));
+    border: 1px solid rgba(124,111,239,0.3);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .result-row:last-child { border-bottom: none; }
+  .result-row-label { font-size: 14px; color: var(--muted); }
+  .result-row-val { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; }
+  .result-row-val.big { font-size: 26px; color: var(--accent2); }
+  .result-row-val.roi-val { color: var(--accent); }
+
+  /* PITCH */
+  .pitch-card {
+    background: var(--surface);
+    border: 1px solid rgba(124,111,239,0.25);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .pitch-title {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pitch-title::before { content: "💬"; }
+  #pitch-text {
+    font-size: 14px;
+    color: #cccce0;
+    line-height: 1.75;
+    font-style: italic;
+  }
+
+  /* BOTÕES */
+  .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem; }
+  .btn-copy, .btn-wpp {
+    padding: 14px;
+    border-radius: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .btn-copy {
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-copy:hover { background: var(--surface); border-color: rgba(255,255,255,0.2); }
+  .btn-wpp {
+    background: #25D366;
+    color: #fff;
+  }
+  .btn-wpp:hover { background: #1ebe5a; transform: translateY(-1px); }
+  .btn-wpp:active { transform: translateY(0); }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--accent2);
+    color: #0a1f14;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 10px 20px;
+    border-radius: 100px;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 999;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 480px) {
+    .metrics { grid-template-columns: 1fr 1fr; }
+    .btns { grid-template-columns: 1fr; }
+    h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">Ferramenta de Vendas</div>
+  <h1>Quanto você perde<br>por <em>não responder</em><br>no WhatsApp?</h1>
+  <p class="hero-sub">Ajuste os números do seu negócio e veja em segundos quanto você está deixando de ganhar por não responder no WhatsApp.</p>
+</div>
+
+<div class="container">
+
+  <div class="nichos" id="nichos">
+    <button class="nicho-btn active" onclick="setNicho(this,'odonto')">Odontologia</button>
+    <button class="nicho-btn" onclick="setNicho(this,'estetica')">Estética</button>
+    <button class="nicho-btn" onclick="setNicho(this,'otica')">Ótica</button>
+    <button class="nicho-btn" onclick="setNicho(this,'cursos')">Cursos / Idiomas</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Realidade atual do seu negócio</div>
+
+    <div class="slider-group">
+      <div class="slider-header">
+        <span class="slider-label">Mensagens por dia no WhatsApp</span>
+        <span class="slider-val" id="v-msgs">20</span>
+      </div>
+      <input type="range" min="5" max="100" step="1" value="20" id="s-msgs" oninput="calc()">
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-header">
+        <span class="slider-label">% sem resposta rápida (fora do horário)</span>
+        <span class="slider-val" id="v-pct">40%</span>
+      </div>
+      <input type="range" min="10" max="80" step="5" value="40" id="s-pct" oninput="calc()">
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-header">
+        <span class="slider-label">% de interessados que viram clientes</span>
+        <span class="slider-val" id="v-conv">20%</span>
+      </div>
+      <input type="range" min="5" max="60" step="5" value="20" id="s-conv" oninput="calc()">
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-header">
+        <span class="slider-label">Ticket médio por cliente (R$)</span>
+        <span class="slider-val" id="v-ticket">R$ 200</span>
+      </div>
+      <input type="range" min="80" max="1500" step="20" value="200" id="s-ticket" oninput="calc()">
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-header">
+        <span class="slider-label">Dias úteis no mês</span>
+        <span class="slider-val" id="v-dias">22</span>
+      </div>
+      <input type="range" min="18" max="26" step="1" value="22" id="s-dias" oninput="calc()">
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-label">Perdidas / mês</div>
+      <div class="metric-val red" id="r-perdidas">—</div>
+      <div class="metric-sub">mensagens sem resposta</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Clientes recuperados</div>
+      <div class="metric-val green" id="r-clientes">—</div>
+      <div class="metric-sub">por mês com o agente</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Receita gerada</div>
+      <div class="metric-val purple" id="r-receita">—</div>
+      <div class="metric-sub">por mês</div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-row">
+      <span class="result-row-label">Faturamento deixado no ralo</span>
+      <span class="result-row-val big" id="r-lucro">—</span>
+    </div>
+  </div>
+
+  <div class="pitch-card">
+    <div class="pitch-title">Argumento pronto para o WhatsApp</div>
+    <div id="pitch-text">Calculando...</div>
+  </div>
+
+  <div class="btns">
+    <button class="btn-copy" onclick="copiarPitch()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copiar argumento
+    </button>
+    <a class="btn-wpp" id="btn-wpp" href="#" onclick="abrirWpp(event)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      Enviar via WhatsApp
+    </a>
+  </div>
+
+</div>
+
+<div class="footer">
+  Feito por <a href="#" id="footer-link">Agente IA CXS</a> &mdash; Automação de atendimento via WhatsApp para negócios em Caxias do Sul
+</div>
+
+<div class="toast" id="toast">Argumento copiado!</div>
+
+<script>
+const SEU_WHATSAPP = '54991682168'; // CaLopes
+
+const nichos = {
+  odonto:   { custo: 2000, ticket: 250, msgs: 25, conv: 20, pct: 45 },
+  estetica: { custo: 2000, ticket: 300, msgs: 20, conv: 25, pct: 40 },
+  otica:    { custo: 1000, ticket: 180, msgs: 15, conv: 20, pct: 35 },
+  cursos:   { custo: 1200, ticket: 150, msgs: 18, conv: 30, pct: 50 },
+};
+
+let nichoAtual = 'odonto';
+let pitchAtual = '';
+
+function setNicho(btn, key) {
+  document.querySelectorAll('.nicho-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  nichoAtual = key;
+  const d = nichos[key];
+  setS('s-msgs', d.msgs);
+  setS('s-pct', d.pct);
+  setS('s-conv', d.conv);
+  setS('s-ticket', d.ticket);
+  calc();
+}
+
+function setS(id, val) { document.getElementById(id).value = val; }
+
+function brl(n) { return 'R$ ' + Math.round(n).toLocaleString('pt-BR'); }
+
+function calc() {
+  const msgs   = +document.getElementById('s-msgs').value;
+  const pct    = +document.getElementById('s-pct').value / 100;
+  const conv   = +document.getElementById('s-conv').value / 100;
+  const ticket = +document.getElementById('s-ticket').value;
+  const dias   = +document.getElementById('s-dias').value;
+  const custo  = nichos[nichoAtual].custo;
+
+  document.getElementById('v-msgs').textContent   = msgs;
+  document.getElementById('v-pct').textContent    = Math.round(pct*100) + '%';
+  document.getElementById('v-conv').textContent   = Math.round(conv*100) + '%';
+  document.getElementById('v-ticket').textContent = 'R$ ' + ticket;
+  document.getElementById('v-dias').textContent   = dias;
+
+  const perdidas_dia = Math.round(msgs * pct);
+  const perdidas_mes = perdidas_dia * dias;
+  const clientes     = Math.round(perdidas_mes * conv);
+  const receita      = clientes * ticket;
+
+  document.getElementById('r-perdidas').textContent = perdidas_mes;
+  document.getElementById('r-clientes').textContent = clientes;
+  document.getElementById('r-receita').textContent  = brl(receita);
+
+  const lucroEl = document.getElementById('r-lucro');
+  lucroEl.textContent = brl(receita);
+  lucroEl.className = 'result-row-val big green';
+
+  pitchAtual = `Você está recebendo ${msgs} mensagens por dia no WhatsApp. Mas ${perdidas_dia} delas chegam fora do horário e você não consegue responder na hora. Se converter só ${Math.round(conv*100)}% desses clientes que ficam sem resposta rápida, são ${clientes} vendas perdidas todo mês. Com ticket médio de R$ ${ticket}, isso dá ${brl(receita)} em faturamento que sai pelo ralo a cada mês. Faz sentido deixar essa grana nas mãos da concorrência?`;
+
+  document.getElementById('pitch-text').textContent = '"' + pitchAtual + '"';
+}
+
+function copiarPitch() {
+  navigator.clipboard.writeText(pitchAtual).then(() => {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  });
+}
+
+function abrirWpp(e) {
+  e.preventDefault();
+  const msg = encodeURIComponent('Olá! Quero saber mais sobre o agente de IA para WhatsApp. Usei a calculadora e fiquei curioso 👇\n\n' + pitchAtual);
+  window.open('https://wa.me/' + SEU_WHATSAPP + '?text=' + msg, '_blank');
+}
+
+document.getElementById('footer-link').href = 'https://wa.me/' + SEU_WHATSAPP;
+
+calc();
+</script>
+</body>
+</html>
