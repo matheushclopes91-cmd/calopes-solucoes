@@ -174,6 +174,17 @@
   .metric-val.red { color: var(--accent-red); }
   .metric-val.white { color: var(--text); }
   .metric-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .metric-full {
+    grid-column: 1 / -1;
+    padding: 2rem;
+  }
+  .metric-val-large {
+    font-family: 'Syne', sans-serif;
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--accent-green);
+    margin: 1rem 0;
+  }
 
   /* RESULTADO FINAL */
   .result-card {
@@ -312,7 +323,6 @@
 <body>
 
 <div class="hero">
-  <div class="hero-badge">Ferramenta de Vendas</div>
   <h1>Quanto você perde<br>por <em>não responder</em><br>no WhatsApp?</h1>
   <p class="hero-sub">Ajuste os números do seu negócio e veja em segundos quanto você está deixando de ganhar por não responder no WhatsApp.</p>
 </div>
@@ -379,19 +389,12 @@
     <div class="metric">
       <div class="metric-label">Clientes recuperados</div>
       <div class="metric-val green" id="r-clientes">—</div>
-      <div class="metric-sub">por mês com o agente</div>
-    </div>
-    <div class="metric">
-      <div class="metric-label">Receita gerada</div>
-      <div class="metric-val purple" id="r-receita">—</div>
       <div class="metric-sub">por mês</div>
     </div>
-  </div>
-
-  <div class="result-card">
-    <div class="result-row">
-      <span class="result-row-label">Faturamento deixado no ralo</span>
-      <span class="result-row-val big" id="r-lucro">—</span>
+    <div class="metric metric-full">
+      <div class="metric-label">Receita gerada</div>
+      <div class="metric-val-large" id="r-receita">—</div>
+      <div class="metric-sub">faturamento deixado no ralo por mês</div>
     </div>
   </div>
 
@@ -469,11 +472,7 @@ function calc() {
 
   document.getElementById('r-perdidas').textContent = perdidas_mes;
   document.getElementById('r-clientes').textContent = clientes;
-  document.getElementById('r-receita').textContent  = brl(receita);
-
-  const lucroEl = document.getElementById('r-lucro');
-  lucroEl.textContent = brl(receita);
-  lucroEl.className = 'result-row-val big positive';
+  document.getElementById('r-receita').textContent = brl(receita);
 
   pitchAtual = `Você está recebendo ${msgs} mensagens por dia no WhatsApp. Mas ${perdidas_dia} delas chegam fora do horário e você não consegue responder na hora. Se converter só ${Math.round(conv*100)}% desses clientes que ficam sem resposta rápida, são ${clientes} vendas perdidas todo mês. Com ticket médio de R$ ${ticket}, isso dá ${brl(receita)} em faturamento que sai pelo ralo a cada mês. Faz sentido deixar essa grana nas mãos da concorrência?`;
 
