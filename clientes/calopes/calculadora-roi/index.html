@@ -11,9 +11,8 @@
     --surface: #13131a;
     --surface2: #1c1c26;
     --border: rgba(255,255,255,0.08);
-    --accent: #00A3E0;
+    --accent: #003DA5;
     --accent-green: #00CC00;
-    --accent-yellow: #FFD700;
     --accent-red: #FF2E2E;
     --text: #f0f0f5;
     --muted: #8888a0;
@@ -40,9 +39,9 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(124,111,239,0.15);
-    border: 1px solid rgba(124,111,239,0.3);
-    color: #a89ef5;
+    background: rgba(0,61,165,0.15);
+    border: 1px solid rgba(0,61,165,0.3);
+    color: #6ba3ff;
     font-size: 12px;
     font-weight: 600;
     padding: 5px 12px;
@@ -92,11 +91,11 @@
     cursor: pointer;
     transition: all 0.2s;
   }
-  .nicho-btn:hover { border-color: rgba(124,111,239,0.4); color: var(--text); }
+  .nicho-btn:hover { border-color: rgba(0,61,165,0.4); color: var(--text); }
   .nicho-btn.active {
-    background: rgba(124,111,239,0.2);
+    background: rgba(0,61,165,0.2);
     border-color: var(--accent);
-    color: #c4beff;
+    color: #6ba3ff;
   }
 
   /* CARD */
@@ -147,10 +146,10 @@
     height: 18px;
     background: var(--accent);
     border-radius: 50%;
-    box-shadow: 0 0 0 4px rgba(124,111,239,0.2);
+    box-shadow: 0 0 0 4px rgba(0,61,165,0.2);
     transition: box-shadow 0.2s;
   }
-  input[type=range]:hover::-webkit-slider-thumb { box-shadow: 0 0 0 6px rgba(124,111,239,0.3); }
+  input[type=range]:hover::-webkit-slider-thumb { box-shadow: 0 0 0 6px rgba(0,61,165,0.3); }
 
   /* MÉTRICAS */
   .metrics {
@@ -178,7 +177,7 @@
 
   /* RESULTADO FINAL */
   .result-card {
-    background: linear-gradient(135deg, rgba(0,163,224,0.15), rgba(0,204,0,0.1));
+    background: linear-gradient(135deg, rgba(0,61,165,0.15), rgba(0,204,0,0.1));
     border: 2px solid rgba(255,46,46,0.4);
     border-radius: var(--radius);
     padding: 2.5rem 2rem;
@@ -213,7 +212,7 @@
   /* PITCH */
   .pitch-card {
     background: var(--surface);
-    border: 1px solid rgba(124,111,239,0.25);
+    border: 1px solid rgba(0,61,165,0.25);
     border-left: 3px solid var(--accent);
     border-radius: 0 var(--radius) var(--radius) 0;
     padding: 1.25rem 1.5rem;
@@ -278,6 +277,11 @@
     border-top: 1px solid var(--border);
   }
   .footer a { color: var(--accent); text-decoration: none; }
+
+  /* Valor positivo (verde) */
+  .result-row-val.positive {
+    color: var(--accent-green);
+  }
 
   /* TOAST */
   .toast {
@@ -469,7 +473,7 @@ function calc() {
 
   const lucroEl = document.getElementById('r-lucro');
   lucroEl.textContent = brl(receita);
-  lucroEl.className = 'result-row-val big green';
+  lucroEl.className = 'result-row-val big positive';
 
   pitchAtual = `Você está recebendo ${msgs} mensagens por dia no WhatsApp. Mas ${perdidas_dia} delas chegam fora do horário e você não consegue responder na hora. Se converter só ${Math.round(conv*100)}% desses clientes que ficam sem resposta rápida, são ${clientes} vendas perdidas todo mês. Com ticket médio de R$ ${ticket}, isso dá ${brl(receita)} em faturamento que sai pelo ralo a cada mês. Faz sentido deixar essa grana nas mãos da concorrência?`;
 
