@@ -7,6 +7,13 @@
 
 ---
 
+## Slide 0 — Abertura
+
+**Título:**
+> Como fazer seu site vender
+
+---
+
 ## Slide 1 — CAPA (gancho)
 
 **Título:**
@@ -26,7 +33,18 @@
 
 ---
 
-## Slide 3 — Os 5 sinais (checklist)
+## Slide 3 — O que o cliente pensa
+
+**Texto:**
+> Quando o site não passa confiança, o cliente não fala nada.
+>
+> Ele simplesmente vai pro próximo resultado no Google.
+>
+> E esse próximo resultado é o seu concorrente.
+
+---
+
+## Slide 4 — Os 5 sinais (checklist)
 
 **Texto:**
 > **5 sinais que seu site está te custando clientes:**
@@ -41,7 +59,7 @@
 
 ---
 
-## Slide 4 — O custo invisível
+## Slide 5 — O custo invisível
 
 **Texto:**
 > Cada um desses problemas é um cliente que chegou até você,
@@ -49,17 +67,6 @@
 > e foi embora sem avisar.
 >
 > Silencioso. Invisível. Todo dia.
-
----
-
-## Slide 5 — O que o cliente pensa
-
-**Texto:**
-> Quando o site não passa confiança, o cliente não fala nada.
->
-> Ele simplesmente vai pro próximo resultado no Google.
->
-> E esse próximo resultado é o seu concorrente.
 
 ---
 
@@ -76,13 +83,18 @@
 
 ---
 
-## Slide 7 — CTA
+## Slide 8 — CTA
 
 **Texto:**
 > Quer que eu dê uma olhada no seu site?
 >
-> Manda o link no WhatsApp.
-> Em até 24h te devolvo uma análise gratuita do que está afastando clientes.
+> Conversa rápida: 15 minutos.
+> Totalmente grátis. Sem obrigação.
+>
+> Você vai saber exatamente quanto faturamento está deixando de ganhar 
+> por não ter um site profissional.
+>
+> Não curtiu? Solicita reembolso em até 7 dias. Sem burocracia.
 
 ---
 
@@ -97,7 +109,11 @@ Site sem botão de WhatsApp. Horário desatualizado. Página que não abre no ce
 
 Nenhum desses donos sabia. Porque cliente que vai embora pelo site não avisa — ele só não volta.
 
-Se quiser saber como está o seu, manda o link no WhatsApp (link na bio). Analiso de graça.
+Quer descobrir quanto faturamento seu site está deixando de gerar? 
+
+Chama no WhatsApp (link na bio). Agende uma conversa rápida de 15 minutos — totalmente grátis e sem obrigação. Você vai saber exatamente o que está afastando clientes.
+
+Não ficou convencido? Sem problema — solicita o reembolso em até 7 dias. Sem burocracia.
 
 #presencadigital #siteempresa #marketingdigital #pequenasempresas #googlenegocios #calopes
 ```
