@@ -7,14 +7,14 @@
 
 ---
 
-## Slide 0 — Abertura
+## Slide 1 — Abertura
 
 **Título:**
 > Como fazer seu site vender
 
 ---
 
-## Slide 1 — CAPA (gancho)
+## Slide 2 — CAPA (gancho)
 
 **Título:**
 > Seu site está afastando clientes.
@@ -22,7 +22,7 @@
 
 ---
 
-## Slide 2 — Setup
+## Slide 3 — Setup
 
 **Texto:**
 > Antes de qualquer compra, o cliente pesquisa.
@@ -33,7 +33,7 @@
 
 ---
 
-## Slide 3 — O que o cliente pensa
+## Slide 4 — O que o cliente pensa
 
 **Texto:**
 > Quando o site não passa confiança, o cliente não fala nada.
@@ -44,7 +44,7 @@
 
 ---
 
-## Slide 4 — Os 5 sinais (checklist)
+## Slide 5 — Os 5 sinais (checklist)
 
 **Texto:**
 > **5 sinais que seu site está te custando clientes:**
@@ -59,7 +59,7 @@
 
 ---
 
-## Slide 5 — O custo invisível
+## Slide 6 — O custo invisível
 
 **Texto:**
 > Cada um desses problemas é um cliente que chegou até você,
@@ -70,7 +70,7 @@
 
 ---
 
-## Slide 6 — O que um site bom faz
+## Slide 7 — O que um site bom faz
 
 **Texto:**
 > Um site que funciona de verdade:
