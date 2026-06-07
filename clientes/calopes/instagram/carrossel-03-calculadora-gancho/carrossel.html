@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel — A calculadora que assusta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0A0A0F;
+            --bg-secondary: #111827;
+            --text-primary: #F5F5F5;
+            --text-secondary: #9CA3AF;
+            --accent: #00AAFF;
+            --danger: #FF4444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-1 {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-secondary) 100%);
+        }
+
+        .slide-interno {
+            background: var(--bg-dark);
+            padding: 100px 80px;
+            position: relative;
+        }
+
+        .slide-3 {
+            background: var(--bg-secondary);
+        }
+
+        .slide-4 {
+            background: var(--bg-dark);
+        }
+
+        .slide-interno::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(0, 170, 255, 0.2);
+        }
+
+        .slide-1 .content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .slide-1 h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 80px;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1;
+            letter-spacing: -0.04em;
+            max-width: 900px;
+        }
+
+        .slide-1 .highlight {
+            color: var(--accent);
+        }
+
+        .slide-interno h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.04;
+            letter-spacing: -0.035em;
+            margin-bottom: 2rem;
+        }
+
+        .slide-interno p {
+            font-size: 24px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide-interno .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* SLIDE 4: CARDS COM NÚMEROS */
+        .cards-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .card {
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 52px;
+            font-weight: 800;
+            color: var(--danger);
+            line-height: 1;
+        }
+
+        .card-label {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* SLIDE 5: BIG NUMBERS */
+        .slide-5 {
+            background: var(--bg-secondary);
+        }
+
+        .slide-5 h2 {
+            font-size: 60px;
+            margin-bottom: 1.5rem;
+        }
+
+        .multiplier {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--accent);
+            margin: 1.5rem 0;
+        }
+
+        .yearly {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 52px;
+            font-weight: 800;
+            color: var(--danger);
+            margin: 1.5rem 0;
+            line-height: 1;
+        }
+
+        /* LOGO */
+        .logo-top {
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .slide-1 .logo-top {
+            top: 60px;
+            left: 60px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .logo-text .name {
+            font-size: 14px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .logo-text .subtitle {
+            font-size: 8px;
+            color: #9CA3AF;
+            line-height: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 5;
+            max-width: 900px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: CAPA -->
+    <div class="slide slide-1">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h1>Fiz uma calculadora.</h1>
+            <h1 style="margin-top: 0.5em; color: var(--accent);">O número que aparece incomoda.</h1>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: CONTEXTO -->
+    <div class="slide slide-2 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>Comecei a reparar em um padrão.</p>
+            <p>Todo dono de negócio que eu converso acha que está "perdendo pouca coisa" com WhatsApp sem resposta.</p>
+            <p>Aí a gente coloca o número na calculadora.</p>
+            <p style="margin-top: 1.5rem; font-size: 28px; color: var(--accent); font-weight: 600;">E o silêncio é pesado.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: COMO FUNCIONA -->
+    <div class="slide slide-3 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h2 style="font-size: 56px; margin-bottom: 1.5rem;">A lógica é simples:</h2>
+            <div style="background: var(--bg-dark); padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <p style="font-size: 22px; line-height: 1.8; font-weight: 600;">
+                    <span class="highlight">Mensagens por dia</span><br>
+                    × <span class="highlight">% sem resposta</span><br>
+                    × <span class="highlight">% que viraria cliente</span><br>
+                    × <span class="highlight">seu ticket médio</span><br>
+                    = <span class="highlight" style="font-size: 28px;">dinheiro deixado na mesa todo mês</span>
+                </p>
+            </div>
+            <p style="margin-top: 1.5rem;">Parece pouco até você ver o número.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: EXEMPLOS REAIS -->
+    <div class="slide slide-4 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h2 style="font-size: 52px; margin-bottom: 1.5rem;">Exemplos reais por nicho:</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-title">Clínica com 25 msgs/dia</div>
+                    <div class="card-number">R$ 2.100</div>
+                    <div class="card-label">por mês</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Salão com 20 msgs/dia</div>
+                    <div class="card-number">R$ 1.050</div>
+                    <div class="card-label">por mês</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Ótica com 15 msgs/dia</div>
+                    <div class="card-number">R$ 840</div>
+                    <div class="card-label">por mês</div>
+                </div>
+            </div>
+            <p style="font-size: 18px; margin-top: 1.5rem; color: var(--text-secondary);">
+                *(considerando 40% sem resposta e conversão de 20%)*
+            </p>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: A VIRADA -->
+    <div class="slide slide-5 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h2>Multiplica por 12.</h2>
+            <div class="yearly">É isso que sai<br>pelo ralo todo ano.</div>
+            <p style="margin-top: 2rem;">Não por falta de produto bom.<br>Não por preço errado.</p>
+            <p style="margin-top: 1rem; font-size: 28px; color: var(--accent); font-weight: 600;">Por falta de resposta rápida.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: CTA DIRETO -->
+    <div class="slide slide-6 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h2 style="margin-bottom: 1.5rem;">A calculadora está no link da bio.</h2>
+            <p><span class="highlight">É gratuita. Leva 30 segundos.</span></p>
+            <p>Você coloca os números do seu negócio e vê o resultado.</p>
+            <p style="margin-top: 1.5rem; font-size: 22px; color: var(--text-secondary);">Se quiser entender como resolver depois, é só me chamar no WhatsApp.</p>
+        </div>
+    </div>
+
+</body>
+</html>

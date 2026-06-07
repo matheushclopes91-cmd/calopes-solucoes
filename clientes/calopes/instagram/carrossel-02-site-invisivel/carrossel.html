@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel — Seu site está te custando clientes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0A0A0F;
+            --bg-secondary: #111827;
+            --text-primary: #F5F5F5;
+            --text-secondary: #9CA3AF;
+            --accent: #00AAFF;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-1 {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-secondary) 100%);
+        }
+
+        .slide-interno {
+            background: var(--bg-dark);
+            padding: 100px 80px;
+            position: relative;
+        }
+
+        .slide-interno::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(0, 170, 255, 0.2);
+        }
+
+        .slide-1 .content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .slide-1 h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 80px;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1;
+            letter-spacing: -0.04em;
+            max-width: 900px;
+        }
+
+        .slide-interno h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.04;
+            letter-spacing: -0.035em;
+            margin-bottom: 2rem;
+        }
+
+        .slide-interno p {
+            font-size: 24px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide-interno .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* SLIDE 3: CHECKLIST */
+        .slide-3 {
+            background: var(--bg-secondary);
+        }
+
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .check-item {
+            font-size: 22px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .check-item::before {
+            content: '☐';
+            font-size: 28px;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        /* SLIDE 6: ARROWS */
+        .slide-6 {
+            background: var(--bg-dark);
+        }
+
+        .arrow-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .arrow-item {
+            font-size: 22px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .arrow-item::before {
+            content: '→';
+            font-size: 28px;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* LOGO */
+        .logo-top {
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .slide-1 .logo-top {
+            top: 60px;
+            left: 60px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .logo-text .name {
+            font-size: 14px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .logo-text .subtitle {
+            font-size: 8px;
+            color: #9CA3AF;
+            line-height: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 5;
+            max-width: 900px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: CAPA -->
+    <div class="slide slide-1">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h1>Seu site está afastando clientes.</h1>
+            <h1 style="margin-top: 0.5em; color: var(--accent);">Mesmo que você ache que está tudo bem.</h1>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: SETUP -->
+    <div class="slide slide-2 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>Antes de qualquer compra, o cliente pesquisa.</p>
+            <p>E a primeira coisa que ele faz é abrir o Google.</p>
+            <p><span class="highlight">O que ele encontra — ou não encontra — define se ele vai chamar você ou o concorrente.</span></p>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: 5 SINAIS -->
+    <div class="slide slide-3 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h2 style="font-size: 56px;">5 sinais que seu site está te custando clientes</h2>
+            <div class="checklist">
+                <div class="check-item">Não abre bem no celular</div>
+                <div class="check-item">Horário de funcionamento errado ou ausente</div>
+                <div class="check-item">Sem botão de WhatsApp visível</div>
+                <div class="check-item">Não aparece no Google quando pesquisam pelo seu serviço</div>
+                <div class="check-item">Última atualização foi há mais de 1 ano</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: CUSTO INVISÍVEL -->
+    <div class="slide slide-4 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>Cada um desses problemas é um cliente que chegou até você,</p>
+            <p>não encontrou o que precisava,</p>
+            <p>e foi embora sem avisar.</p>
+            <p style="margin-top: 2rem; font-size: 28px; color: var(--accent); font-weight: 600;">Silencioso. Invisível. Todo dia.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: O QUE O CLIENTE PENSA -->
+    <div class="slide slide-5 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>Quando o site não passa confiança, o cliente não fala nada.</p>
+            <p>Ele simplesmente vai pro próximo resultado no Google.</p>
+            <p style="margin-top: 2rem; font-size: 28px; color: var(--accent); font-weight: 600;">E esse próximo resultado é o seu concorrente.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: O QUE UM SITE BOM FAZ -->
+    <div class="slide slide-6 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h2 style="font-size: 56px; margin-bottom: 1.5rem;">Um site que funciona de verdade:</h2>
+            <div class="arrow-list">
+                <div class="arrow-item">Aparece quando pesquisam pelo seu serviço</div>
+                <div class="arrow-item">Mostra horário, endereço e formas de contato de cara</div>
+                <div class="arrow-item">Tem botão de WhatsApp que abre na hora</div>
+                <div class="arrow-item">Carrega rápido no celular</div>
+                <div class="arrow-item">Passa a mesma confiança do seu atendimento pessoal</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: CTA -->
+    <div class="slide slide-7 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h2 style="margin-bottom: 1.5rem;">Quer que eu dê uma olhada no seu site?</h2>
+            <p>Manda o link no WhatsApp.</p>
+            <p><span class="highlight">Em até 24h te devolvo uma análise gratuita do que está afastando clientes.</span></p>
+        </div>
+    </div>
+
+</body>
+</html>

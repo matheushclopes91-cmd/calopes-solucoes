@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foto de Perfil CaLopes - Download</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #fafafa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #262626;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .subtitle {
+            color: #8e8e8e;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        canvas {
+            border: 2px solid #dbdbdb;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            display: block;
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        button {
+            background: #00A3E0;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #0089b8;
+        }
+
+        .info {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #dbdbdb;
+            color: #565656;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Foto de Perfil</h1>
+        <p class="subtitle">CaLopes Soluções</p>
+
+        <canvas id="profileCanvas" width="400" height="400"></canvas>
+
+        <button onclick="downloadImage()">📥 Baixar Imagem (PNG)</button>
+
+        <div class="info">
+            <strong>Dicas de uso:</strong>
+            <ul style="text-align: left;">
+                <li>Tamanho: 400x400px (alta resolução)</li>
+                <li>Fundo transparente</li>
+                <li>Pronto para Instagram, LinkedIn, etc</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function drawProfile() {
+            const canvas = document.getElementById('profileCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Limpar canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Desenhar círculo de fundo preto
+            ctx.fillStyle = '#000000';
+            ctx.beginPath();
+            ctx.arc(200, 200, 190, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Desenhar círculo azul (stroke)
+            ctx.strokeStyle = '#00A3E0';
+            ctx.lineWidth = 16;
+            ctx.beginPath();
+            ctx.arc(200, 200, 190, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Desenhar checkmark
+            ctx.strokeStyle = '#00A3E0';
+            ctx.lineWidth = 24;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            ctx.beginPath();
+            ctx.moveTo(120, 200);
+            ctx.lineTo(170, 250);
+            ctx.lineTo(280, 140);
+            ctx.stroke();
+        }
+
+        function downloadImage() {
+            const canvas = document.getElementById('profileCanvas');
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'calopes-profile-picture.png';
+            link.click();
+        }
+
+        // Desenhar ao carregar
+        window.addEventListener('load', drawProfile);
+    </script>
+</body>
+</html>

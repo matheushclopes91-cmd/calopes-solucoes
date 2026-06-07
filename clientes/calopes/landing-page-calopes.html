@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CaLopes Soluções Inteligentes — Tecnologia que vende</title>
+  <meta name="description" content="Site profissional, automação no WhatsApp e estratégia digital para empresas que querem crescer. Sem enrolação, sem jargão — só resultado." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0A0A0F;
+      --bg-card:     #111827;
+      --accent:      #00AAFF;
+      --accent-dim:  rgba(0,170,255,0.12);
+      --accent-glow: rgba(0,170,255,0.22);
+      --text:        #F5F5F5;
+      --text-muted:  #9CA3AF;
+      --border:      rgba(0,170,255,0.25);
+      --border-soft: rgba(255,255,255,0.07);
+      --red:         #FF4D4D;
+      --radius:      12px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 6%;
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.25rem; color: var(--accent); text-decoration: none; letter-spacing: -0.5px; }
+    .nav-logo span { color: var(--text); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    nav ul a:hover { color: var(--accent); }
+    .nav-cta { background: var(--accent); color: #000 !important; font-weight: 600 !important; padding: 0.5rem 1.2rem; border-radius: 8px; transition: opacity 0.2s !important; }
+    .nav-cta:hover { opacity: 0.85; color: #000 !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 92vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 6rem 6% 4rem; position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 40%, rgba(0,170,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--accent-dim); border: 1px solid var(--border);
+      border-radius: 100px; padding: 0.35rem 1rem;
+      font-size: 0.8rem; color: var(--accent); font-weight: 600;
+      margin-bottom: 1.75rem; letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    h1 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(2rem,5vw,3.5rem); line-height: 1.15; max-width: 820px; margin-bottom: 1.5rem; letter-spacing: -1px; }
+    h1 .highlight { color: var(--accent); }
+    .hero-sub { font-size: clamp(1rem,2vw,1.2rem); color: var(--text-muted); max-width: 600px; margin-bottom: 2.5rem; line-height: 1.7; }
+    .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--accent); color: #000; font-weight: 700; font-size: 1rem;
+      padding: 0.85rem 2rem; border-radius: 10px; text-decoration: none;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--text); font-weight: 500; font-size: 1rem;
+      padding: 0.85rem 1.75rem; border-radius: 10px; border: 1px solid var(--border);
+      text-decoration: none; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-proof { margin-top: 4rem; display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap; justify-content: center; }
+    .proof-item { text-align: center; }
+    .proof-item strong { display: block; font-family: 'Montserrat', sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent); }
+    .proof-item span { font-size: 0.85rem; color: var(--text-muted); }
+    .proof-divider { width: 1px; height: 40px; background: var(--border); }
+
+    /* ── SHARED SECTION ── */
+    section { padding: 6rem 6%; }
+    .section-label { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    h2 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(1.75rem,3.5vw,2.75rem); line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 1.25rem; }
+    .section-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 620px; line-height: 1.75; }
+
+    /* ── PROBLEMA ── */
+    #problema { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    #problema .inner, #beneficios .inner, #faq .inner { max-width: 1100px; margin: 0 auto; }
+    #problema .header, #beneficios .header, #faq .header { text-align: center; margin-bottom: 3.5rem; }
+    #problema .header .section-desc, #beneficios .header .section-desc { margin: 0 auto; }
+
+    .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .pain-card { background: var(--bg); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 1.75rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
+    .pain-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0; transition: opacity 0.3s; }
+    .pain-card:hover::before { opacity: 1; }
+    .pain-card:hover { border-color: var(--border); }
+    .pain-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .pain-card h3 { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .pain-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+    .pain-highlight { background: var(--accent-dim); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem 2rem; text-align: center; margin-top: 2.5rem; }
+    .pain-highlight p { font-size: 1.1rem; font-weight: 500; line-height: 1.7; }
+    .pain-highlight p span { color: var(--accent); font-weight: 700; }
+
+    /* ── CALCULADORA ── */
+    #calculadora { background: var(--bg); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+    #calculadora .inner { max-width: 760px; margin: 0 auto; }
+    #calculadora .header { text-align: center; margin-bottom: 2.5rem; }
+    #calculadora .header .section-desc { margin: 0 auto; }
+
+    .nicho-tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
+    .nicho-btn {
+      padding: 8px 18px; border-radius: 100px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card); color: var(--text-muted);
+      font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .nicho-btn:hover { border-color: var(--border); color: var(--text); }
+    .nicho-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+
+    .calc-card { background: var(--bg-card); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.25rem; }
+    .calc-card-title { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.5rem; }
+
+    .slider-group { margin-bottom: 1.5rem; }
+    .slider-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+    .slider-label { font-size: 0.9rem; color: #cccce0; }
+    .slider-val { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; color: var(--accent); }
+
+    input[type=range] {
+      -webkit-appearance: none; width: 100%; height: 4px;
+      background: rgba(255,255,255,0.08); border-radius: 2px; outline: none; cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 18px; height: 18px;
+      background: var(--accent); border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(0,170,255,0.2); transition: box-shadow 0.2s;
+    }
+    input[type=range]:hover::-webkit-slider-thumb { box-shadow: 0 0 0 7px rgba(0,170,255,0.25); }
+
+    .dor-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .dor-metric { background: var(--bg-card); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 1.25rem; text-align: center; }
+    .dor-metric-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+    .dor-metric-val { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--red); }
+    .dor-metric-sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+    .dor-resultado {
+      background: rgba(255,77,77,0.07); border: 1px solid rgba(255,77,77,0.3);
+      border-radius: var(--radius); padding: 2rem; text-align: center; margin-bottom: 1.5rem;
+    }
+    .dor-resultado-label { font-size: 0.8rem; color: rgba(255,77,77,0.8); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+    .dor-resultado-valor { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 800; color: var(--red); line-height: 1; margin-bottom: 0.5rem; }
+    .dor-resultado-desc { font-size: 0.9rem; color: var(--text-muted); }
+
+    .calc-cta-group { display: flex; gap: 0.75rem; }
+    .btn-wpp-calc {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+      background: #25D366; color: #fff; font-weight: 700; font-size: 0.95rem;
+      padding: 0.9rem 1.5rem; border-radius: 10px; text-decoration: none; border: none;
+      cursor: pointer; transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-wpp-calc:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-secondary-calc {
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg); border: 1px solid var(--border); color: var(--text);
+      font-size: 0.9rem; font-weight: 500; padding: 0.9rem 1.25rem;
+      border-radius: 10px; cursor: pointer; transition: border-color 0.2s; white-space: nowrap;
+    }
+    .btn-secondary-calc:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── MÉTODO ── */
+    #metodo-wrap { padding: 6rem 6%; }
+    #metodo { max-width: 1100px; margin: 0 auto; }
+    .metodo-header { max-width: 620px; margin-bottom: 4rem; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .step-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 2rem; position: relative; box-shadow: 0 0 30px var(--accent-glow); transition: transform 0.2s;
+    }
+    .step-card:hover { transform: translateY(-4px); }
+    .step-number { font-family: 'Montserrat', sans-serif; font-size: 3.5rem; font-weight: 800; color: var(--accent); opacity: 0.15; position: absolute; top: 1rem; right: 1.5rem; line-height: 1; pointer-events: none; }
+    .step-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: var(--accent-dim); border-radius: 100px; padding: 0.25rem 0.75rem; margin-bottom: 1rem; }
+    .step-card h3 { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .step-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
+    .step-card ul { margin-top: 1rem; padding-left: 0; list-style: none; }
+    .step-card ul li { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.4rem; padding-left: 1.1rem; position: relative; }
+    .step-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+    /* ── BENEFÍCIOS ── */
+    #beneficios { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+    .benefit-card { background: var(--bg); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; transition: border-color 0.2s; }
+    .benefit-card:hover { border-color: var(--border); }
+    .benefit-icon { width: 44px; height: 44px; background: var(--accent-dim); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; }
+    .benefit-card h3 { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; }
+    .benefit-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* ── PARA QUEM ── */
+    #para-quem-wrap { padding: 6rem 6%; }
+    #para-quem { max-width: 1100px; margin: 0 auto; }
+    .para-quem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .fit-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; }
+    .fit-card h3 { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+    .fit-card.yes h3 { color: var(--accent); }
+    .fit-card.no h3 { color: #FF4444; }
+    .fit-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .fit-list li { font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.6rem; }
+    .fit-list li::before { flex-shrink: 0; margin-top: 2px; }
+    .fit-card.yes .fit-list li::before { content: '✓'; color: var(--accent); font-weight: 700; }
+    .fit-card.no .fit-list li::before { content: '✕'; color: #FF4444; font-weight: 700; }
+
+    /* ── FAQ ── */
+    #faq { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { width: 100%; background: none; border: none; color: var(--text); font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; text-align: left; padding: 1.5rem 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .faq-question:hover { color: var(--accent); }
+    .faq-chevron { flex-shrink: 0; width: 22px; height: 22px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 0.75rem; transition: transform 0.25s; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.25s; }
+    .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 1.5rem; }
+    .faq-answer p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.75; }
+
+    /* ── CTA FINAL ── */
+    #cta-final { text-align: center; padding: 7rem 6%; position: relative; overflow: hidden; }
+    #cta-final::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(0,170,255,0.07) 0%, transparent 70%); pointer-events: none; }
+    #cta-final h2 { max-width: 700px; margin: 0 auto 1.25rem; }
+    #cta-final p { color: var(--text-muted); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .cta-reassurance { margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 2.5rem 6%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--accent); text-decoration: none; }
+    .footer-logo span { color: var(--text); }
+    footer p { font-size: 0.8rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.8rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── FLOATING WA ── */
+    .floating-wa { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; width: 56px; height: 56px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.2s, box-shadow 0.2s; }
+    .floating-wa:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
+    .floating-wa svg { width: 30px; height: 30px; }
+
+    /* ── TOAST ── */
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--accent); color: #000; font-weight: 700; font-size: 0.8rem; padding: 0.6rem 1.25rem; border-radius: 100px; opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 999; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .para-quem-grid { grid-template-columns: 1fr; }
+      .dor-metrics { grid-template-columns: 1fr 1fr; }
+      .hero-proof { gap: 1.5rem; }
+      .proof-divider { display: none; }
+      .calc-cta-group { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .dor-metrics { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Ca<span>Lopes</span></a>
+  <ul>
+    <li><a href="#problema">O problema</a></li>
+    <li><a href="#calculadora">Calculadora</a></li>
+    <li><a href="#metodo-wrap">O método</a></li>
+    <li><a href="#faq">Dúvidas</a></li>
+    <li><a href="https://wa.me/5554991682168?text=Oi%2C+vim+pelo+site+da+CaLopes+e+quero+entender+como+funciona." class="nav-cta">Falar no WhatsApp</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge">Tecnologia que transforma atendimento em vendas</div>
+  <h1>
+    Seu negócio recebe mensagens<br />
+    que nunca viram clientes.<br />
+    <span class="highlight">Você sabe quanto isso custa?</span>
+  </h1>
+  <p class="hero-sub">
+    A CaLopes estrutura o processo digital do seu negócio — site profissional,
+    automação no WhatsApp e captação de clientes. Sem você precisar entender de tecnologia.
+  </p>
+  <div class="hero-cta-group">
+    <a href="https://wa.me/5554991682168?text=Oi%2C+vim+pelo+site+da+CaLopes+e+quero+entender+como+funciona." class="btn-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.858L0 24l6.335-1.61A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 01-5.031-1.388l-.36-.214-3.732.949.994-3.628-.235-.374A9.788 9.788 0 012.182 12C2.182 6.575 6.575 2.182 12 2.182S21.818 6.575 21.818 12 17.425 21.818 12 21.818z"/></svg>
+      Falar com a CaLopes
+    </a>
+    <a href="#calculadora" class="btn-ghost">Calcular minha perda →</a>
+  </div>
+  <div class="hero-proof">
+    <div class="proof-item"><strong>Site</strong><span>que aparece no Google</span></div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><strong>WhatsApp</strong><span>que responde na hora</span></div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><strong>Leads</strong><span>qualificados toda semana</span></div>
+  </div>
+</section>
+
+<!-- O PROBLEMA -->
+<section id="problema">
+  <div class="inner">
+    <div class="header">
+      <span class="section-label">O problema real</span>
+      <h2>Você não perde venda por falta de produto.<br />Perde por falta de processo.</h2>
+      <p class="section-desc">
+        A maioria das empresas tem bom produto e bom atendimento.
+        O que falta é um processo digital que funcione de verdade — não um site que ninguém
+        encontra ou um WhatsApp que demora horas pra responder.
+      </p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">🔍</div>
+        <h3>Negócio invisível no Google</h3>
+        <p>Quando alguém busca pelo seu serviço no Google, você aparece? Se não, ou se o que aparece estiver desatualizado, você está entregando cliente de graça pro concorrente — sem nem saber.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">💬</div>
+        <h3>WhatsApp que deixa venda esfriar</h3>
+        <p>O cliente mandou mensagem, você estava atendendo. Duas horas depois você responde. Ele já comprou em outro lugar. Não foi negligência — foi falta de automação no momento certo.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📋</div>
+        <h3>Prospecção manual que não avança</h3>
+        <p>Pesquisar clientes no Google, anotar em planilha, mandar mensagem genérica, não receber retorno — e recomeçar tudo na semana seguinte. Isso não é estratégia, é desgaste.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📉</div>
+        <h3>Receita que depende só de indicação</h3>
+        <p>Indicação é ótimo canal — mas se for o único, você não tem previsibilidade. Um mês cheio, três meses vazios. Captação digital muda essa equação sem depender de sorte.</p>
+      </div>
+    </div>
+    <div class="pain-highlight">
+      <p>O problema não é tecnologia complicada. É que <span>ninguém estruturou o processo digital do seu negócio.</span> É exatamente isso que a CaLopes faz.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULADORA DE DOR -->
+<section id="calculadora">
+  <div class="inner">
+    <div class="header">
+      <span class="section-label">Calculadora de perda</span>
+      <h2>Quanto seu negócio deixa na mesa todo mês?</h2>
+      <p class="section-desc">Ajuste os números do seu negócio. Não é estimativa de agência — é a dor que já está acontecendo agora, só que invisível.</p>
+    </div>
+
+    <div class="nicho-tabs" id="nicho-tabs">
+      <button class="nicho-btn active" onclick="setNicho(this,'otica')">Ótica</button>
+      <button class="nicho-btn" onclick="setNicho(this,'clinica')">Clínica / Consultório</button>
+      <button class="nicho-btn" onclick="setNicho(this,'salao')">Salão de Beleza</button>
+      <button class="nicho-btn" onclick="setNicho(this,'academia')">Academia / Pilates</button>
+      <button class="nicho-btn" onclick="setNicho(this,'loja')">Loja / Comércio</button>
+    </div>
+
+    <div class="calc-card">
+      <div class="calc-card-title">Realidade atual do seu negócio</div>
+
+      <div class="slider-group">
+        <div class="slider-header">
+          <span class="slider-label">Mensagens recebidas por dia no WhatsApp</span>
+          <span class="slider-val" id="v-msgs">15</span>
+        </div>
+        <input type="range" min="3" max="100" step="1" value="15" id="s-msgs" oninput="calcDor()">
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-header">
+          <span class="slider-label">% que fica sem resposta rápida (fora do horário ou esquecidas)</span>
+          <span class="slider-val" id="v-pct">35%</span>
+        </div>
+        <input type="range" min="10" max="80" step="5" value="35" id="s-pct" oninput="calcDor()">
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-header">
+          <span class="slider-label">% de interessados que virariam clientes com resposta na hora</span>
+          <span class="slider-val" id="v-conv">20%</span>
+        </div>
+        <input type="range" min="5" max="60" step="5" value="20" id="s-conv" oninput="calcDor()">
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-header">
+          <span class="slider-label">Ticket médio por cliente (R$)</span>
+          <span class="slider-val" id="v-ticket">R$ 200</span>
+        </div>
+        <input type="range" min="50" max="2000" step="10" value="200" id="s-ticket" oninput="calcDor()">
+      </div>
+
+      <div class="slider-group" style="margin-bottom:0;">
+        <div class="slider-header">
+          <span class="slider-label">Dias úteis no mês</span>
+          <span class="slider-val" id="v-dias">22</span>
+        </div>
+        <input type="range" min="18" max="26" step="1" value="22" id="s-dias" oninput="calcDor()">
+      </div>
+    </div>
+
+    <div class="dor-metrics">
+      <div class="dor-metric">
+        <div class="dor-metric-label">Mensagens perdidas</div>
+        <div class="dor-metric-val" id="r-perdidas">—</div>
+        <div class="dor-metric-sub">por mês</div>
+      </div>
+      <div class="dor-metric">
+        <div class="dor-metric-label">Clientes perdidos</div>
+        <div class="dor-metric-val" id="r-clientes">—</div>
+        <div class="dor-metric-sub">por mês</div>
+      </div>
+      <div class="dor-metric">
+        <div class="dor-metric-label">Vendas perdidas</div>
+        <div class="dor-metric-val" id="r-vendas">—</div>
+        <div class="dor-metric-sub">por mês</div>
+      </div>
+    </div>
+
+    <div class="dor-resultado">
+      <div class="dor-resultado-label">Você está deixando na mesa todo mês</div>
+      <div class="dor-resultado-valor" id="r-total">R$ —</div>
+      <div class="dor-resultado-desc" id="r-anual">Calcule acima para ver o resultado</div>
+    </div>
+
+    <div class="calc-cta-group">
+      <a href="#" id="btn-wpp-calc" class="btn-wpp-calc">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.858L0 24l6.335-1.61A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 01-5.031-1.388l-.36-.214-3.732.949.994-3.628-.235-.374A9.788 9.788 0 012.182 12C2.182 6.575 6.575 2.182 12 2.182S21.818 6.575 21.818 12 17.425 21.818 12 21.818z"/></svg>
+        Quero parar de perder isso
+      </a>
+      <button class="btn-secondary-calc" onclick="copiarResultado()">Copiar resultado</button>
+    </div>
+  </div>
+</section>
+
+<!-- O MÉTODO CALOPES -->
+<div id="metodo-wrap">
+<section>
+  <div id="metodo">
+    <div class="metodo-header">
+      <span class="section-label">O Método CaLopes</span>
+      <h2>Três frentes. Uma mudança real no seu negócio.</h2>
+      <p class="section-desc">Antes de propor qualquer coisa, analisamos seu negócio, seus concorrentes e onde estão as oportunidades. O que entregamos é feito pra você — não pra qualquer empresa.</p>
+    </div>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-number">01</div>
+        <div class="step-tag">Presença digital</div>
+        <h3>Site que aparece e converte</h3>
+        <p>Um site profissional, rápido e otimizado pro Google — que passa confiança pra quem nunca ouviu falar do seu negócio. Com tudo que o cliente precisa pra decidir entrar em contato.</p>
+        <ul>
+          <li>Aparece nas buscas locais do Google</li>
+          <li>Funciona bem no celular (onde a maioria das buscas acontece)</li>
+          <li>Botão de WhatsApp direto na tela principal</li>
+          <li>Informações de horário, localização e serviços sempre atualizadas</li>
+        </ul>
+      </div>
+      <div class="step-card">
+        <div class="step-number">02</div>
+        <div class="step-tag">Automação de atendimento</div>
+        <h3>WhatsApp que responde enquanto você atende</h3>
+        <p>Configuramos respostas automáticas inteligentes que qualificam o cliente, respondem dúvidas frequentes e encaminham pro atendimento — sem você parar o que está fazendo.</p>
+        <ul>
+          <li>Resposta instantânea fora do horário comercial</li>
+          <li>Qualificação automática antes de chegar até você</li>
+          <li>Nenhuma mensagem sem resposta</li>
+          <li>Agenda com clientes quentes, não leads frios</li>
+        </ul>
+      </div>
+      <div class="step-card">
+        <div class="step-number">03</div>
+        <div class="step-tag">Captação de clientes</div>
+        <h3>Estratégia de leads que não depende de sorte</h3>
+        <p>Montamos um processo de captação digital pra você receber clientes potenciais de forma previsível — em vez de depender exclusivamente de indicação ou do movimento da rua.</p>
+        <ul>
+          <li>Perfil otimizado no Google Meu Negócio</li>
+          <li>Estratégia de conteúdo para redes sociais (sem precisar virar influencer)</li>
+          <li>Campanhas locais simples quando fizer sentido</li>
+          <li>Relatório mensal do que está funcionando</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- BENEFÍCIOS -->
+<section id="beneficios">
+  <div class="inner">
+    <div class="header">
+      <span class="section-label">O que muda</span>
+      <h2>O que você ganha quando o processo está funcionando</h2>
+      <p class="section-desc">Não são promessas vagas. São as mudanças concretas que acontecem quando o processo digital está estruturado no dia a dia.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">📅</div>
+        <h3>Novos clientes toda semana</h3>
+        <p>Em vez de semanas sem movimento seguidas de semanas corridas, você passa a ter um fluxo mais previsível de novos contatos qualificados.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">⏱️</div>
+        <h3>Menos tempo respondendo, mais tempo vendendo</h3>
+        <p>A automação filtra e responde as dúvidas básicas. Quando a mensagem chega pra você, o cliente já está pronto pro atendimento de verdade.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🔎</div>
+        <h3>Presença online que compete de verdade</h3>
+        <p>Com o site e perfil certos, seu negócio aparece no Google tanto quanto qualquer concorrente — e com a vantagem do atendimento personalizado que rede grande não dá.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">💰</div>
+        <h3>Menos dependência de indicação</h3>
+        <p>Indicação continua sendo ótimo canal — mas deixa de ser o único. Captação digital ativa funciona mesmo quando o boca a boca está fraco.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📊</div>
+        <h3>Visão clara do que está funcionando</h3>
+        <p>Você vai saber quantas pessoas visitaram seu site, quantas mandaram mensagem e de onde vieram. Sem achismo — com número.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🛠️</div>
+        <h3>Você foca no que sabe fazer</h3>
+        <p>Você sabe atender, sabe do seu produto, sabe do seu cliente. A tecnologia é problema nosso — não seu. Você não precisa aprender nada de sistema.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM É -->
+<div id="para-quem-wrap">
+  <section>
+    <div id="para-quem">
+      <span class="section-label">Fit de cliente</span>
+      <h2>A CaLopes é pra você?</h2>
+      <p class="section-desc">Trabalhamos com negócios específicos e dedicamos atenção real a cada cliente. Por isso, é importante entender se faz sentido antes de conversar.</p>
+      <div class="para-quem-grid">
+        <div class="fit-card yes">
+          <h3>✓ Faz sentido se você...</h3>
+          <ul class="fit-list">
+            <li>Tem um negócio com pelo menos 1 ano de operação</li>
+            <li>Sabe que sua presença digital poderia ser melhor, mas não sabe por onde começar</li>
+            <li>Está cansado de depender só de indicação pra crescer</li>
+            <li>Quer resultado prático — não relatório bonito que não gera cliente</li>
+            <li>Está disposto a investir em um processo que leva semanas pra funcionar de verdade</li>
+          </ul>
+        </div>
+        <div class="fit-card no">
+          <h3>✕ Não faz sentido se você...</h3>
+          <ul class="fit-list">
+            <li>Está procurando a opção mais barata acima de qualquer outra coisa</li>
+            <li>Espera resultado em 3 dias — processo digital leva tempo pra consolidar</li>
+            <li>Não está disposto a colaborar com informações sobre o negócio</li>
+            <li>Quer escalar uma operação de franquias com dezenas de unidades (não é nosso foco)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="inner">
+    <div class="header">
+      <span class="section-label">Perguntas frequentes</span>
+      <h2>Dúvidas diretas, respostas diretas.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Preciso entender de tecnologia pra trabalhar com vocês?<span class="faq-chevron">▾</span></button>
+        <div class="faq-answer"><p>Não. Nossa função é justamente tirar isso das suas costas. Você nos conta como o seu negócio funciona, quem é o seu cliente e quais são suas principais dificuldades — nós cuidamos da parte técnica. O que você vai receber é resultado, não reunião sobre tecnologia.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Meu negócio é muito pequeno pra isso fazer sentido?<span class="faq-chevron">▾</span></button>
+        <div class="faq-answer"><p>Pelo contrário — é justamente o negócio menor que mais ganha com um processo digital bem feito. Grandes redes já têm equipe de marketing. Você compete com personalização e atendimento. O que a CaLopes faz é colocar isso visível onde o cliente está procurando.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Quanto tempo leva pra ver resultado?<span class="faq-chevron">▾</span></button>
+        <div class="faq-answer"><p>Depende do ponto de partida. Um negócio que não aparecia no Google e passa a aparecer costuma sentir diferença nas primeiras semanas. Automação de WhatsApp funciona desde o primeiro dia. Resultados de captação consistente levam 60–90 dias pra se consolidar — mas o processo já está funcionando antes disso.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Como funciona — vocês entregam e somem?<span class="faq-chevron">▾</span></button>
+        <div class="faq-answer"><p>Tem acompanhamento. Entregamos o projeto e ficamos junto no início pra garantir que está funcionando. Depois disso, você decide se quer manutenção mensal ou prefere gerir por conta própria com suporte pontual. Não fazemos entrega e desaparecemos.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Já tentei agência antes e não funcionou. O que é diferente aqui?<span class="faq-chevron">▾</span></button>
+        <div class="faq-answer"><p>Na maioria dos casos que ouvimos, o problema foi entrega genérica — o mesmo site, o mesmo texto, o mesmo processo pra qualquer cliente. Aqui, antes de propor qualquer coisa, analisamos o seu negócio especificamente: seu site atual, seus concorrentes, sua presença no Google. O que entregamos tem o nome da sua empresa — não de uma empresa qualquer.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Qual o investimento?<span class="faq-chevron">▾</span></button>
+        <div class="faq-answer"><p>Cada projeto tem um escopo diferente, então o valor depende do que faz sentido pra você. O que posso dizer é que trabalhamos com empresas de diferentes portes e os valores refletem o escopo de cada projeto. A conversa no WhatsApp é sem compromisso, e você sai com uma análise do seu negócio mesmo que não avancemos juntos.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <span class="section-label">Próximo passo</span>
+  <h2>Vamos analisar o seu negócio antes de qualquer proposta. Sem custo, sem compromisso.</h2>
+  <p>Manda uma mensagem no WhatsApp, me conta o seu negócio e o que está travando. Se fizer sentido trabalharmos juntos, você recebe uma análise do que pode mudar e uma proposta clara — sem rodeios.</p>
+  <a href="https://wa.me/5554991682168?text=Oi%2C+vim+pelo+site+da+CaLopes+e+quero+uma+an%C3%A1lise+do+meu+neg%C3%B3cio." class="btn-primary" style="font-size:1.1rem; padding: 1rem 2.25rem;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.858L0 24l6.335-1.61A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 01-5.031-1.388l-.36-.214-3.732.949.994-3.628-.235-.374A9.788 9.788 0 012.182 12C2.182 6.575 6.575 2.182 12 2.182S21.818 6.575 21.818 12 17.425 21.818 12 21.818z"/></svg>
+    Quero uma análise do meu negócio
+  </a>
+  <p class="cta-reassurance">Conversa no WhatsApp. Sem formulário, sem burocracia.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#hero" class="footer-logo">Ca<span>Lopes</span> Soluções Inteligentes</a>
+  <p>© 2026 CaLopes Soluções Inteligentes — Caxias do Sul, RS</p>
+  <div class="footer-links">
+    <a href="https://wa.me/5554991682168">WhatsApp</a>
+    <a href="https://instagram.com/calopes">Instagram</a>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/5554991682168?text=Oi%2C+vim+pelo+site+da+CaLopes!" class="floating-wa" title="Falar no WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.858L0 24l6.335-1.61A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 01-5.031-1.388l-.36-.214-3.732.949.994-3.628-.235-.374A9.788 9.788 0 012.182 12C2.182 6.575 6.575 2.182 12 2.182S21.818 6.575 21.818 12 17.425 21.818 12 21.818z"/></svg>
+</a>
+
+<div class="toast" id="toast">Copiado!</div>
+
+<script>
+const SEU_WPP = '5554991682168';
+
+const nichos = {
+  otica:    { msgs: 15, pct: 35, conv: 20, ticket: 200 },
+  clinica:  { msgs: 25, pct: 45, conv: 25, ticket: 280 },
+  salao:    { msgs: 20, pct: 40, conv: 30, ticket: 120 },
+  academia: { msgs: 18, pct: 40, conv: 25, ticket: 160 },
+  loja:     { msgs: 22, pct: 35, conv: 20, ticket: 180 },
+};
+
+let resultadoAtual = '';
+
+function setNicho(btn, key) {
+  document.querySelectorAll('.nicho-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const d = nichos[key];
+  document.getElementById('s-msgs').value   = d.msgs;
+  document.getElementById('s-pct').value    = d.pct;
+  document.getElementById('s-conv').value   = d.conv;
+  document.getElementById('s-ticket').value = d.ticket;
+  calcDor();
+}
+
+function brl(n) { return 'R$ ' + Math.round(n).toLocaleString('pt-BR'); }
+
+function calcDor() {
+  const msgs   = +document.getElementById('s-msgs').value;
+  const pct    = +document.getElementById('s-pct').value / 100;
+  const conv   = +document.getElementById('s-conv').value / 100;
+  const ticket = +document.getElementById('s-ticket').value;
+  const dias   = +document.getElementById('s-dias').value;
+
+  document.getElementById('v-msgs').textContent   = msgs;
+  document.getElementById('v-pct').textContent    = Math.round(pct * 100) + '%';
+  document.getElementById('v-conv').textContent   = Math.round(conv * 100) + '%';
+  document.getElementById('v-ticket').textContent = 'R$ ' + ticket;
+  document.getElementById('v-dias').textContent   = dias;
+
+  const perdidas_dia = Math.round(msgs * pct);
+  const perdidas_mes = perdidas_dia * dias;
+  const clientes_mes = Math.round(perdidas_mes * conv);
+  const receita_mes  = clientes_mes * ticket;
+  const receita_ano  = receita_mes * 12;
+
+  document.getElementById('r-perdidas').textContent = perdidas_mes;
+  document.getElementById('r-clientes').textContent = clientes_mes;
+  document.getElementById('r-vendas').textContent   = brl(receita_mes);
+  document.getElementById('r-total').textContent    = brl(receita_mes);
+  document.getElementById('r-anual').textContent    = `Isso é ${brl(receita_ano)} por ano saindo pelo ralo.`;
+
+  resultadoAtual = `Fiz a calculadora da CaLopes e vi que estou perdendo ${brl(receita_mes)} por mês (${brl(receita_ano)}/ano) com mensagens sem resposta. São ${perdidas_mes} mensagens e ${clientes_mes} clientes perdidos. Quero entender como resolver isso.`;
+
+  document.getElementById('btn-wpp-calc').href =
+    'https://wa.me/' + SEU_WPP + '?text=' + encodeURIComponent(resultadoAtual);
+}
+
+function copiarResultado() {
+  navigator.clipboard.writeText(resultadoAtual).then(() => {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  });
+}
+
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+calcDor();
+</script>
+</body>
+</html>
