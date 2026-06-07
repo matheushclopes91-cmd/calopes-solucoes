@@ -180,7 +180,7 @@
   }
   .metric-val-large {
     font-family: 'Syne', sans-serif;
-    font-size: 56px;
+    font-size: clamp(32px, 8vw, 56px);
     font-weight: 800;
     color: var(--accent-green);
     margin: 1rem 0;
@@ -316,6 +316,7 @@
   @media (max-width: 480px) {
     .metrics { grid-template-columns: 1fr 1fr; }
     .btns { grid-template-columns: 1fr; }
+    .metric-full { padding: 1.5rem 1rem; }
     h1 { font-size: 26px; }
   }
 </style>
