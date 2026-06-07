@@ -1,17 +1,18 @@
-# Legenda — Carrossel 04: Os 90 Segundos que Definem seu Sucesso
+# Legenda — Carrossel 04: Os 90 Segundos, que Definem seu Sucesso
 
 ```
-80% das pessoas pesquisam no Google antes de ligar.
+Na vida real: 90 segundos para formar uma impressão.
+Na internet: 5 segundos.
 
-Se você não aparece lá, o cliente nunca chega até você.
+Se seu site não convence em 5 segundos, o cliente já saiu.
 
-A maioria dos donos de ótica e pequenos negócios não aparece não porque é ruim — aparece porque ninguém configurou o site para o Google entender que você existe.
+Não é porque você é ruim. É porque seu site não está configurado para vender rapidamente.
 
-Enquanto isso, você está perdendo clientes toda semana para quem SIM aparece nos primeiros resultados.
+Velocidade, estrutura, clareza — tudo importa nos primeiros 5 segundos.
 
-Quer saber se seu site está aparecendo? Manda um DM que faço uma análise rápida.
+Quer saber se seu site está perdendo clientes? Manda um DM.
 
-Link na bio para marcar uma conversa de 10 minutos. Sem compromisso. Você vai entender exatamente quanto está deixando de ganhar.
+Link na bio para conversar 10 minutos. Sem compromisso. Tem 7 dias para se arrepender.
 
-#seo #google #siteprofissional #pequenasempresas #calopes #conversaodevizitas
+#seo #velocidade #siteprofissional #primeiraimpressao #calopes #conversaodevizitas
 ```
