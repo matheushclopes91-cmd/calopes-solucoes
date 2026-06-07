@@ -11,9 +11,10 @@
     --surface: #13131a;
     --surface2: #1c1c26;
     --border: rgba(255,255,255,0.08);
-    --accent: #7c6fef;
-    --accent2: #4fd1a0;
-    --accent3: #f06292;
+    --accent: #00A3E0;
+    --accent-green: #00CC00;
+    --accent-yellow: #FFD700;
+    --accent-red: #FF2E2E;
     --text: #f0f0f5;
     --muted: #8888a0;
     --radius: 14px;
@@ -31,7 +32,7 @@
 
   /* HERO */
   .hero {
-    padding: 3rem 1.5rem 2rem;
+    padding: 4rem 1.5rem 3rem;
     max-width: 680px;
     margin: 0 auto;
   }
@@ -55,10 +56,10 @@
 
   h1 {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(28px, 5vw, 42px);
+    font-size: clamp(32px, 6vw, 52px);
     font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 0.75rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
   }
   h1 em { font-style: normal; color: var(--accent); }
@@ -169,31 +170,44 @@
     font-size: 22px;
     font-weight: 700;
   }
-  .metric-val.green { color: var(--accent2); }
+  .metric-val.green { color: var(--accent-green); }
   .metric-val.purple { color: var(--accent); }
-  .metric-val.red { color: var(--accent3); }
+  .metric-val.red { color: var(--accent-red); }
   .metric-val.white { color: var(--text); }
   .metric-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
   /* RESULTADO FINAL */
   .result-card {
-    background: linear-gradient(135deg, rgba(124,111,239,0.15), rgba(79,209,160,0.1));
-    border: 1px solid rgba(124,111,239,0.3);
+    background: linear-gradient(135deg, rgba(0,163,224,0.15), rgba(0,204,0,0.1));
+    border: 2px solid rgba(255,46,46,0.4);
     border-radius: var(--radius);
-    padding: 1.5rem;
+    padding: 2.5rem 2rem;
     margin-bottom: 1rem;
   }
   .result-row {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.6rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
   }
   .result-row:last-child { border-bottom: none; }
-  .result-row-label { font-size: 14px; color: var(--muted); }
-  .result-row-val { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; }
-  .result-row-val.big { font-size: 26px; color: var(--accent2); }
+  .result-row-label {
+    font-size: 16px;
+    color: var(--text);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .result-row-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+  }
+  .result-row-val.big {
+    font-size: 52px;
+    color: var(--accent-red);
+    text-shadow: 0 0 20px rgba(255,46,46,0.3);
+  }
   .result-row-val.roi-val { color: var(--accent); }
 
   /* PITCH */
