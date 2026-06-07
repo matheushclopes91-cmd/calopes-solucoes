@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Profissional + Posicionamento Google | CaLopes Soluções</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0A0A0F;
+            --bg-secondary: #111827;
+            --text-primary: #F5F5F5;
+            --text-secondary: #9CA3AF;
+            --accent: #00AAFF;
+            --accent-dark: #0088CC;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 170, 255, 0.05) 0%, rgba(0, 170, 255, 0.02) 100%);
+            border-bottom: 1px solid rgba(0, 170, 255, 0.1);
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 3.2rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* ========== ALERT BOX ========== */
+        .alert-box {
+            background: rgba(0, 170, 255, 0.08);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem 2rem;
+            margin: 3rem auto;
+            max-width: 1000px;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .alert-box strong {
+            color: var(--accent);
+        }
+
+        /* ========== BENEFITS GRID ========== */
+        .benefits-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .benefit-card {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(0, 170, 255, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 170, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .benefit-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .benefit-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* ========== CONVERTER SECTION ========== */
+        .converter-section {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .converter-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        @media (max-width: 768px) {
+            .converter-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* ========== CALCULATOR ========== */
+        .calculator {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(0, 170, 255, 0.3);
+            border-radius: 12px;
+            padding: 2.5rem;
+        }
+
+        .calculator h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 170, 255, 0.2);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 8px rgba(0, 170, 255, 0.2);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to right, var(--accent), rgba(0, 170, 255, 0.3));
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            box-shadow: 0 0 0 4px rgba(0, 170, 255, 0.15);
+            transition: box-shadow 0.2s;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 0 4px rgba(0, 170, 255, 0.15);
+            transition: box-shadow 0.2s;
+        }
+
+        input[type="range"]:hover::-webkit-slider-thumb {
+            box-shadow: 0 0 0 6px rgba(0, 170, 255, 0.25);
+        }
+
+        input[type="range"]:hover::-moz-range-thumb {
+            box-shadow: 0 0 0 6px rgba(0, 170, 255, 0.25);
+        }
+
+        .input-currency::before {
+            content: 'R$ ';
+            position: absolute;
+        }
+
+        .results {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 170, 255, 0.2);
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .result-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .result-row.highlight {
+            background: rgba(0, 170, 255, 0.08);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .result-row.highlight .result-label {
+            color: var(--text-primary);
+        }
+
+        .result-row.highlight .result-value {
+            font-size: 1.3rem;
+        }
+
+        /* ========== FORM CAPTURE ========== */
+        .capture-form {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(0, 170, 255, 0.3);
+            border-radius: 12px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .capture-form h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .capture-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .capture-form select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 170, 255, 0.2);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .capture-form select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 8px rgba(0, 170, 255, 0.2);
+        }
+
+        .capture-form select option {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 170, 255, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(0, 170, 255, 0.1);
+            margin-top: 4rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ========== UTILITIES ========== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .benefit-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .benefit-card:nth-child(1) { animation-delay: 0.1s; }
+        .benefit-card:nth-child(2) { animation-delay: 0.2s; }
+        .benefit-card:nth-child(3) { animation-delay: 0.3s; }
+        .benefit-card:nth-child(4) { animation-delay: 0.4s; }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            header {
+                padding: 3rem 1rem 2rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .alert-box {
+                margin: 2rem 0;
+                padding: 1rem 1.5rem;
+                font-size: 0.95rem;
+            }
+
+            .benefits-section {
+                padding: 2rem 1rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .converter-section {
+                padding: 2rem 1rem;
+            }
+
+            .calculator,
+            .capture-form {
+                padding: 1.5rem;
+            }
+
+            .calculator h2,
+            .capture-form h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1>Seu site que vende. Ranqueia no Google.</h1>
+        <p><strong>Por que?</strong> 80% dos clientes pesquisam no Google antes de ligar. Se não aparecer lá, o cliente já foi para o concorrente. Nós criamos sites que ranqueiam, carregam rápido no celular e convertem.</p>
+    </header>
+
+    <!-- ALERT BOX -->
+    <div class="alert-box">
+        <strong>70% dos acessos vêm do celular.</strong> Um site lento ou desatualizado custa clientes. Um site rápido e bem posicionado atrai clientes 24/7, sem precisar de você estar disponível.
+    </div>
+
+    <!-- BENEFITS SECTION -->
+    <section class="benefits-section">
+        <div class="section-title mb-2">Soluções inteligentes para seu site</div>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <h3>🔍 Ranqueia no Google</h3>
+                <p><strong>Porque</strong> aparecer nos primeiros resultados = clientes chegando sozinhos. SEO integrado = tráfego gratuito contínuo.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>⚡ Carrega em Segundos</h3>
+                <p><strong>Porque</strong> site lento = cliente sai. Site rápido = visitante vira cliente. Velocidade é conversão.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>⭐ Gera Confiança</h3>
+                <p><strong>Porque</strong> site profissional parece maior, mais confiável. Avaliações visíveis = prova social que vende.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>💰 Trabalha 24/7</h3>
+                <p><strong>Porque</strong> seu site atrai clientes enquanto você dorme. Reduz tempo perdido em atendimento básico.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONVERTER SECTION -->
+    <section class="converter-section">
+        <div class="section-title mb-2">Quanto você está deixando na mesa?</div>
+        <div class="converter-grid">
+            <!-- CALCULADORA -->
+            <div class="calculator">
+                <h2>Calcule sua perda</h2>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Veja quanto você deixa de ganhar por mês sem um site que ranqueia.</p>
+
+                <!-- NICHOS -->
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                    <button style="padding: 0.5rem 1rem; background: rgba(0, 170, 255, 0.2); border: 1px solid rgba(0, 170, 255, 0.5); color: var(--accent); border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.2s;" onclick="setNicho(this, 'optica')">Ótica</button>
+                    <button style="padding: 0.5rem 1rem; background: transparent; border: 1px solid rgba(0, 170, 255, 0.2); color: var(--text-secondary); border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.2s;" onclick="setNicho(this, 'estetica')">Estética</button>
+                    <button style="padding: 0.5rem 1rem; background: transparent; border: 1px solid rgba(0, 170, 255, 0.2); color: var(--text-secondary); border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.2s;" onclick="setNicho(this, 'barbearia')">Barbearia</button>
+                    <button style="padding: 0.5rem 1rem; background: transparent; border: 1px solid rgba(0, 170, 255, 0.2); color: var(--text-secondary); border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.2s;" onclick="setNicho(this, 'outro')">Outro</button>
+                </div>
+
+                <!-- SLIDERS -->
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <label>Visitantes únicos/mês que DEVERIAM vir</label>
+                        <span style="font-weight: 700; color: var(--accent);" id="v-leads">100</span>
+                    </div>
+                    <input type="range" min="20" max="500" step="10" value="100" id="s-leads" oninput="calcularROI()" style="width: 100%; cursor: pointer;">
+                </div>
+
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <label>Ticket médio (R$)</label>
+                        <span style="font-weight: 700; color: var(--accent);" id="v-ticket">R$ 500</span>
+                    </div>
+                    <input type="range" min="100" max="5000" step="100" value="500" id="s-ticket" oninput="calcularROI()" style="width: 100%; cursor: pointer;">
+                </div>
+
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <label>Taxa de conversão esperada (%)</label>
+                        <span style="font-weight: 700; color: var(--accent);" id="v-conversao">5%</span>
+                    </div>
+                    <input type="range" min="1" max="30" step="1" value="5" id="s-conversao" oninput="calcularROI()" style="width: 100%; cursor: pointer;">
+                </div>
+
+                <div class="results">
+                    <div class="result-row">
+                        <span class="result-label">Visitantes perdidos/mês</span>
+                        <span class="result-value" id="r-perdidos">60</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Clientes não conquistados</span>
+                        <span class="result-value" id="r-clientes">3</span>
+                    </div>
+                    <div class="result-row highlight">
+                        <span class="result-label">Faturamento deixado na mesa</span>
+                        <span class="result-value" id="r-faturamento">R$ 1.500,00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORMULÁRIO DE CAPTURA -->
+            <div class="capture-form">
+                <h2>Vamos conversar?</h2>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Sem compromisso. Entenda em 10 minutos como um site pode trazer mais clientes pro seu negócio.</p>
+
+                <div class="form-group">
+                    <label for="empresa">Nome da Empresa</label>
+                    <input
+                        type="text"
+                        id="empresa"
+                        placeholder="Ex: Ótica Visão"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsapp">WhatsApp</label>
+                    <input
+                        type="tel"
+                        id="whatsapp"
+                        placeholder="(11) 99999-9999"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="segmento">Segmento do Negócio</label>
+                    <select id="segmento" required>
+                        <option value="">Selecione um segmento...</option>
+                        <option value="optica">Ótica / Joalheria</option>
+                        <option value="estetica">Estética / Spa</option>
+                        <option value="barbearia">Barbearia / Salão</option>
+                        <option value="profissional">Profissional Liberal</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+
+                <button class="btn-primary" onclick="enviarFormulario()">Vamos Conversar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p><strong>CaLopes Soluções Inteligentes</strong></p>
+        <p>Transformamos o invisível em clientes. Sites que ranqueiam e vendem para pequenos negócios locais.</p>
+        <p style="font-size: 0.85rem; margin-top: 0.8rem; color: var(--text-secondary);">Próximo passo: Automação de atendimento via IA</p>
+    </footer>
+
+    <script>
+        // ========== CONFIG ==========
+        const WHATSAPP_NUMERO = '54991682168';
+
+        const nichos = {
+            optica:    { ticket: 350, visitantes: 80 },
+            estetica:  { ticket: 400, visitantes: 100 },
+            barbearia: { ticket: 150, visitantes: 120 },
+            outro:     { ticket: 500, visitantes: 100 }
+        };
+
+        let nichoAtual = 'optica';
+
+        // ========== FUNÇÕES ==========
+        function setNicho(btn, key) {
+            document.querySelectorAll('.converter-grid button').forEach(b => {
+                b.style.background = 'transparent';
+                b.style.borderColor = 'rgba(0, 170, 255, 0.2)';
+                b.style.color = 'var(--text-secondary)';
+            });
+            btn.style.background = 'rgba(0, 170, 255, 0.2)';
+            btn.style.borderColor = 'rgba(0, 170, 255, 0.5)';
+            btn.style.color = 'var(--accent)';
+
+            nichoAtual = key;
+            const d = nichos[key];
+            document.getElementById('s-leads').value = d.visitantes;
+            document.getElementById('s-ticket').value = d.ticket;
+            calcularROI();
+        }
+
+        function calcularROI() {
+            const visitantes = parseFloat(document.getElementById('s-leads').value) || 0;
+            const ticket = parseFloat(document.getElementById('s-ticket').value) || 0;
+            const conversao = parseFloat(document.getElementById('s-conversao').value) || 0;
+
+            // 60% dos visitantes são perdidos por falta de site/posicionamento
+            const visitantesPerda = Math.round(visitantes * 0.6);
+            const clientesPerda = Math.round(visitantesPerda * (conversao / 100));
+            const faturamentoPerda = clientesPerda * ticket;
+
+            // Atualizar valores dos sliders
+            document.getElementById('v-leads').textContent = visitantes;
+            document.getElementById('v-ticket').textContent = 'R$ ' + ticket.toLocaleString('pt-BR');
+            document.getElementById('v-conversao').textContent = conversao + '%';
+
+            // Atualizar resultados
+            document.getElementById('r-perdidos').textContent = visitantesPerda;
+            document.getElementById('r-clientes').textContent = clientesPerda;
+            document.getElementById('r-faturamento').textContent =
+                faturamentoPerda.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2
+                });
+        }
+
+        function enviarFormulario() {
+            const empresa = document.getElementById('empresa').value.trim();
+            const whatsapp = document.getElementById('whatsapp').value.trim();
+            const segmento = document.getElementById('segmento').value;
+
+            if (!empresa || !whatsapp || !segmento) {
+                alert('Preencha todos os campos antes de enviar.');
+                return;
+            }
+
+            const mensagem = encodeURIComponent(
+                `Olá! Gostaria de conversar sobre um site profissional para meu negócio.\n\n` +
+                `Empresa: ${empresa}\n` +
+                `Segmento: ${segmento}`
+            );
+
+            window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${mensagem}`, '_blank');
+            alert('Redirecionando para o WhatsApp. Obrigado!');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            calcularROI();
+        });
+    </script>
+
+</body>
+</html>

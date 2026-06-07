@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel — Os 90 Segundos que Definem seu Sucesso</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0A0A0F;
+            --bg-secondary: #111827;
+            --text-primary: #F5F5F5;
+            --text-secondary: #9CA3AF;
+            --accent: #00AAFF;
+            --danger: #FF4444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-1 {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-secondary) 100%);
+        }
+
+        .slide-interno {
+            background: var(--bg-dark);
+            padding: 100px 80px;
+            position: relative;
+        }
+
+        .slide-3 {
+            background: var(--bg-secondary);
+        }
+
+        .slide-4 {
+            background: var(--bg-dark);
+        }
+
+        .slide-5 {
+            background: var(--bg-secondary);
+        }
+
+        .slide-6 {
+            background: var(--bg-dark);
+        }
+
+        .slide-interno::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(0, 170, 255, 0.2);
+        }
+
+        .slide-1 .content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .slide-1 h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 80px;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1;
+            letter-spacing: -0.04em;
+            max-width: 900px;
+        }
+
+        .slide-1 .highlight {
+            color: var(--accent);
+        }
+
+        .slide-1 .subtitle {
+            font-size: 32px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-top: 1.5rem;
+        }
+
+        .slide-interno h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.04;
+            letter-spacing: -0.035em;
+            margin-bottom: 2rem;
+        }
+
+        .slide-interno p {
+            font-size: 24px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide-interno .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .big-stat {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 92px;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+            margin: 1.5rem 0;
+        }
+
+        .stat-label {
+            font-size: 26px;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .check-item {
+            font-size: 24px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 500;
+        }
+
+        .check-item::before {
+            content: '✓';
+            font-size: 32px;
+            color: var(--accent);
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        /* LOGO */
+        .logo-top {
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .slide-1 .logo-top {
+            top: 60px;
+            left: 60px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .logo-text .name {
+            font-size: 14px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .logo-text .subtitle {
+            font-size: 8px;
+            color: #9CA3AF;
+            line-height: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 5;
+            max-width: 900px;
+        }
+
+        .cta-box {
+            background: rgba(0, 170, 255, 0.1);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .cta-text {
+            font-size: 26px;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-link {
+            font-size: 20px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: CAPA -->
+    <div class="slide slide-1">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h1>Os <span class="highlight">90 segundos</span></h1>
+            <h1 style="margin-top: 0.5em;">que definem seu sucesso</h1>
+            <p class="subtitle">Sem aparecer, você desaparece.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: O PROBLEMA -->
+    <div class="slide slide-2 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="big-stat">80%</div>
+            <p style="font-size: 28px; color: var(--text-primary); font-weight: 600;">dos clientes pesquisam no Google antes de ligar.</p>
+            <p style="margin-top: 2rem; font-size: 24px;">Se você não aparece lá nos primeiros <span class="highlight">90 segundos</span> de busca, o cliente já foi pro concorrente.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: VERDADE INCONVENIENTE -->
+    <div class="slide slide-3 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h2 style="font-size: 56px;">A verdade incômoda:</h2>
+            <p style="font-size: 28px; margin-top: 2rem;">Seu site não aparece não porque você é ruim.</p>
+            <p style="font-size: 28px; margin-top: 1.5rem;">Aparece porque o Google entende <span class="highlight">seu site é importante.</span></p>
+            <p style="font-size: 22px; margin-top: 2rem; color: #9CA3AF;">A maioria das óticas e pequenos negócios não aparecem porque ninguém configurou isso.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: PRIMEIRO RESULTADO -->
+    <div class="slide slide-4 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h2 style="font-size: 60px;">Resultado?</h2>
+            <div class="checklist" style="margin-top: 2rem;">
+                <div class="check-item">Seu cliente pensa que seu concorrente é melhor</div>
+                <div class="check-item">Você perde vendas todas as semanas</div>
+                <div class="check-item">Seu negócio crescimento estagnou</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: COMO APARECE -->
+    <div class="slide slide-5 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h2 style="font-size: 64px;">Como você aparece nos primeiros 90 segundos?</h2>
+            <div class="checklist" style="margin-top: 2rem;">
+                <div class="check-item" style="font-size: 26px;">Site estruturado pra Google entender</div>
+                <div class="check-item" style="font-size: 26px;">Velocidade rápida no celular</div>
+                <div class="check-item" style="font-size: 26px;">Autoridade local (Google Meu Negócio)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: MÓVEL É TUDO -->
+    <div class="slide slide-6 slide-interno">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="big-stat">87%</div>
+            <p style="font-size: 28px; color: var(--text-primary); font-weight: 600;">dos acessos vêm do celular.</p>
+            <p style="margin-top: 2rem; font-size: 26px;">Se seu site demora pra carregar no celular, você já perdeu.</p>
+            <p style="margin-top: 1.5rem; font-size: 24px; color: var(--text-secondary);">O Google penaliza sites lentos. Seus clientes também.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: CTA FINAL -->
+    <div class="slide slide-7 slide-interno" style="background: var(--bg-dark);">
+        <div class="logo-top">
+            <div class="logo-icon">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#00AAFF" stroke-width="8"/>
+                    <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#00AAFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="name">CaLopes</div>
+                <div class="subtitle">Soluções Inteligentes</div>
+            </div>
+        </div>
+        <div class="content">
+            <h2 style="margin-bottom: 1.5rem;">Pronto pra começar?</h2>
+            <p style="font-size: 26px; margin-bottom: 1.5rem;">Vamos conversar 10 minutos sobre seu site.</p>
+            <p style="font-size: 22px; color: var(--text-secondary); margin-bottom: 2rem;"><span class="highlight">Sem compromisso.</span> Você vai entender exatamente por que não aparece e quanto está deixando de ganhar.</p>
+            <div class="cta-box">
+                <p class="cta-text">Link na bio</p>
+                <p class="cta-link">Marca um horário</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

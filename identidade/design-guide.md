@@ -52,11 +52,11 @@ Dark mode high-tech com pegada corporativa e profissional. Inspirado nas cores d
 
 ## Logo
 
-- **Arquivo:** identidade/logo.png (ainda não criada)
-- **Direção:** minimalista, iniciais CL ou nome CaLopes com elemento sutil de tecnologia/código/conexões, usando o azul celeste (#00AAFF)
-- **Versão pra fundo escuro:** identidade/logo-branco.png (quando criar)
-- **Onde usar:** slide final do carrossel (CTA), header de propostas, slides de apresentação
+- **Arquivo:** Logo/logo.svg
+- **Design:** checkmark azul (#00A3E0) com detalhe fluido branco em fundo preto — minimalista, tech, confiança
+- **Onde usar:** slide final do carrossel (CTA), header de propostas, slides de apresentação, sites de clientes
 - **Tamanho sugerido:** largura entre 120–200px nos HTMLs
+- **Nota:** Usar sempre com o fundo escuro (#1A1A1A) ou transparente
 
 ---
 

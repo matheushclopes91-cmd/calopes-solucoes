@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ótica Lauro - Catálogo & Agendamento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            color: #333;
+            background: #f9f9f9;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #e55a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #1a3a52;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            padding: 3rem 1rem;
+            background: white;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #1a3a52;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: #ff6b35;
+            color: #ff6b35;
+            background: #fff5f0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #999;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-brand {
+            font-size: 0.8rem;
+            color: #999;
+            text-transform: uppercase;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+
+        .product-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #ff6b35;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .product-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .product-btn:hover {
+            background: #20ba5e;
+        }
+
+        .schedule-section {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e8f4ff 100%);
+        }
+
+        .schedule-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .schedule-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #1a3a52;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 8px rgba(255, 107, 53, 0.2);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .form-submit:hover {
+            background: #e55a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .stores-section {
+            background: white;
+        }
+
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .store-card {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .store-card h3 {
+            margin-bottom: 1rem;
+            color: #1a3a52;
+        }
+
+        .store-info {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .store-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .store-btn {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .store-maps {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .store-maps:hover {
+            background: #45a049;
+        }
+
+        .store-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .store-whatsapp:hover {
+            background: #20ba5e;
+        }
+
+        footer {
+            background: #1a3a52;
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .comparison-box {
+            padding: 2rem;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+        }
+
+        .comparison-box.before {
+            background: #fff5f0;
+            border-color: #ff9999;
+        }
+
+        .comparison-box.after {
+            background: #f0fff5;
+            border-color: #99ff99;
+        }
+
+        .comparison-box h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .comparison-box ul {
+            list-style: none;
+        }
+
+        .comparison-box li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .comparison-box li:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>👓 Ótica Lauro Caxias</h1>
+            <nav>
+                <a href="#catalogo">Catálogo</a>
+                <a href="#agendar">Agendar</a>
+                <a href="#lojas">Lojas</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h2>Saúde e Estilo no Olhar</h2>
+        <p>Encontre seus óculos ideais em segundos — sem sair de casa. Ou agende uma consulta com nossos oftalmologistas.</p>
+        <div class="cta-buttons">
+            <a href="#catalogo" class="btn btn-primary">Ver Catálogo Completo</a>
+            <a href="https://wa.me/555485999999?text=Oi!%20Quero%20agendar%20uma%20consulta%20de%20óculos" target="_blank" class="btn btn-secondary">💬 Fale via WhatsApp</a>
+        </div>
+    </div>
+
+    <section id="catalogo" class="container">
+        <h2>Nosso Catálogo</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 2rem; font-size: 1.05rem;">Veja as opções disponíveis. Encontrou? Chamar a gente no WhatsApp — entregamos em até 24h.</p>
+
+        <div class="filters">
+            <button class="filter-btn active">Todos</button>
+            <button class="filter-btn">Óculos de Grau</button>
+            <button class="filter-btn">Óculos de Sol</button>
+            <button class="filter-btn">Proteção UV</button>
+            <button class="filter-btn">Lentes Progressivas</button>
+        </div>
+
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=300&fit=crop" alt="Ray-Ban Aviador" class="product-image" style="object-fit: cover;">
+                <div class="product-info">
+                    <div class="product-brand">Ray-Ban</div>
+                    <div class="product-name">Aviador Clássico</div>
+                    <div class="product-tags">
+                        <span class="tag">UV 400</span>
+                        <span class="tag">Óculos de Sol</span>
+                    </div>
+                    <a href="https://wa.me/555485999999?text=Oi!%20Tenho%20interesse%20no%20Ray-Ban%20Aviador%20Clássico" target="_blank" class="product-btn">💬 Quero este</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1511499767150-a48a237aa25d?w=400&h=300&fit=crop" alt="Armação Moderna" class="product-image" style="object-fit: cover;">
+                <div class="product-info">
+                    <div class="product-brand">Prada</div>
+                    <div class="product-name">Armação Moderna</div>
+                    <div class="product-tags">
+                        <span class="tag">Grau</span>
+                        <span class="tag">Premium</span>
+                    </div>
+                    <a href="https://wa.me/555485999999?text=Oi!%20Quero%20saber%20mais%20sobre%20a%20Armação%20Moderna%20Prada" target="_blank" class="product-btn">💬 Quero este</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1559007615-cd4628902d4a?w=400&h=300&fit=crop" alt="Oakley Esportivo" class="product-image" style="object-fit: cover;">
+                <div class="product-info">
+                    <div class="product-brand">Oakley</div>
+                    <div class="product-name">Esportivo Pro</div>
+                    <div class="product-tags">
+                        <span class="tag">Proteção</span>
+                        <span class="tag">Esporte</span>
+                    </div>
+                    <a href="https://wa.me/555485999999?text=Oi!%20Tenho%20interesse%20no%20Oakley%20Esportivo%20Pro" target="_blank" class="product-btn">💬 Quero este</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1578957861739-6ed6a37e7f6d?w=400&h=300&fit=crop" alt="Proteção Anti-Azul" class="product-image" style="object-fit: cover;">
+                <div class="product-info">
+                    <div class="product-brand">Lauro Basic</div>
+                    <div class="product-name">Proteção Anti-Azul</div>
+                    <div class="product-tags">
+                        <span class="tag">Computador</span>
+                        <span class="tag">Acessível</span>
+                    </div>
+                    <a href="https://wa.me/555485999999?text=Oi!%20Quero%20saber%20o%20preço%20da%20Proteção%20Anti-Azul" target="_blank" class="product-btn">💬 Quero este</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1556821552-7f41c5d440db?w=400&h=300&fit=crop" alt="Tom Ford Moda" class="product-image" style="object-fit: cover;">
+                <div class="product-info">
+                    <div class="product-brand">Tom Ford</div>
+                    <div class="product-name">Armação Moda</div>
+                    <div class="product-tags">
+                        <span class="tag">Design</span>
+                        <span class="tag">Luxo</span>
+                    </div>
+                    <a href="https://wa.me/555485999999?text=Oi!%20Tenho%20interesse%20na%20Armação%20Moda%20Tom%20Ford" target="_blank" class="product-btn">💬 Quero este</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1508134168881-cb037b72f6f2?w=400&h=300&fit=crop" alt="Dior Retrô" class="product-image" style="object-fit: cover;">
+                <div class="product-info">
+                    <div class="product-brand">Dior</div>
+                    <div class="product-name">Óculos Retrô</div>
+                    <div class="product-tags">
+                        <span class="tag">Estilo</span>
+                        <span class="tag">Premium</span>
+                    </div>
+                    <a href="https://wa.me/555485999999?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20Dior%20Retrô" target="_blank" class="product-btn">💬 Quero este</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="background: linear-gradient(135deg, #f0fff5 0%, #e8fff0 100%);">
+        <h2>Por que Escolher a Ótica Lauro?</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+                <h3 style="color: #1a3a52;">Resultado em 24h</h3>
+                <p style="color: #666;">Chamar no WhatsApp, receber a proposta no mesmo dia.</p>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">👨‍⚕️</div>
+                <h3 style="color: #1a3a52;">Oftalmólogo de Verdade</h3>
+                <p style="color: #666;">Consulta profissional, não é venda de estoque.</p>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🎁</div>
+                <h3 style="color: #1a3a52;">Garantia Completa</h3>
+                <p style="color: #666;">Se não ficar bom, a gente arruma ou devolve.</p>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">💚</div>
+                <h3 style="color: #1a3a52;">Desde 1971</h3>
+                <p style="color: #666;">Mais de 50 anos confiando na saúde dos seus olhos.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="agendar" class="schedule-section container">
+        <div class="schedule-content">
+            <h2>Agende sua Consulta Oftalmológica</h2>
+            <h3>✓ Sem fila  ✓ Sem espera  ✓ Resultado na hora</h3>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;">Nossos oftalmologistas estão prontos para avaliar seus olhos e encontrar a solução perfeita.</p>
+
+            <form>
+                <div class="form-group">
+                    <label>Seu Nome</label>
+                    <input type="text" placeholder="João Silva" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Telefone / WhatsApp</label>
+                    <input type="tel" placeholder="(85) 99999-9999" required>
+                </div>
+
+                <div class="form-group">
+                    <label>O que você procura?</label>
+                    <select required>
+                        <option>Selecionar...</option>
+                        <option>Óculos de Grau</option>
+                        <option>Óculos de Sol</option>
+                        <option>Exame Oftalmológico</option>
+                        <option>Lentes Progressivas</option>
+                        <option>Ajuste/Reparo</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Data Preferida</label>
+                    <input type="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Qual Loja?</label>
+                    <select required>
+                        <option>Selecionar...</option>
+                        <option>Loja 1 - Av. Júlio de Castilhos</option>
+                        <option>Loja 2 - Centro</option>
+                        <option>Loja 3 - Shopping</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="form-submit">Enviar Agendamento</button>
+            </form>
+
+            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid rgba(26, 58, 82, 0.2); text-align: center;">
+                <p style="color: #666; margin-bottom: 1rem;">Prefere conversar direto? Clique no botão abaixo:</p>
+                <a href="https://wa.me/555485999999?text=Oi!%20Quero%20agendar%20uma%20consulta%20oftalmológica" target="_blank" style="display: inline-block; padding: 0.8rem 1.5rem; background: #25D366; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">💬 Agendar via WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="lojas" class="stores-section container">
+        <h2>Nossas Lojas</h2>
+
+        <div class="stores-grid">
+            <div class="store-card">
+                <h3>Loja 1</h3>
+                <div class="store-info">
+                    <strong>Av. Júlio de Castilhos, 1234</strong><br>
+                    Caxias do Sul, RS 95014-500<br>
+                    <br>
+                    ⏰ Seg-Sex: 9h-19h<br>
+                    Sáb: 9h-14h<br>
+                    Dom: Fechado
+                </div>
+                <div class="store-buttons">
+                    <a href="https://maps.google.com/?q=Av.+Júlio+de+Castilhos,+1234" target="_blank" class="store-btn store-maps">📍 Google Maps</a>
+                    <a href="https://wa.me/555485999999?text=Oi!%20Estou%20perto%20da%20Loja%201.%20Vocês%20estão%20abertos?" target="_blank" class="store-btn store-whatsapp">💬 Avisar</a>
+                </div>
+            </div>
+
+            <div class="store-card">
+                <h3>Loja 2</h3>
+                <div class="store-info">
+                    <strong>Rua Centro, 567</strong><br>
+                    Centro, RS 95010-150<br>
+                    <br>
+                    ⏰ Seg-Sáb: 10h-18h<br>
+                    Dom: 10h-14h
+                </div>
+                <div class="store-buttons">
+                    <a href="https://maps.google.com/?q=Rua+Centro,+567" target="_blank" class="store-btn store-maps">📍 Google Maps</a>
+                    <a href="https://wa.me/555485999999?text=Oi!%20Estou%20perto%20da%20Loja%202.%20Vocês%20estão%20abertos?" target="_blank" class="store-btn store-whatsapp">💬 Avisar</a>
+                </div>
+            </div>
+
+            <div class="store-card">
+                <h3>Loja 3</h3>
+                <div class="store-info">
+                    <strong>Shopping Plaza, Piso 2</strong><br>
+                    Caxias do Sul, RS 95014-100<br>
+                    <br>
+                    ⏰ Seg-Dom: 10h-21h<br>
+                    Funcionamento conforme shopping
+                </div>
+                <div class="store-buttons">
+                    <a href="https://maps.google.com/?q=Shopping+Plaza+Piso+2" target="_blank" class="store-btn store-maps">📍 Google Maps</a>
+                    <a href="https://wa.me/555485999999?text=Oi!%20Estou%20perto%20da%20Loja%203.%20Vocês%20estão%20abertos?" target="_blank" class="store-btn store-whatsapp">💬 Avisar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>De "Cartão de Visita" para "Máquina de Vendas"</h2>
+
+        <div class="comparison">
+            <div class="comparison-box before">
+                <h3>❌ Site Atual</h3>
+                <ul>
+                    <li>6 fotos de óculos sem contexto</li>
+                    <li>Nenhuma informação de marca/modelo/preço</li>
+                    <li>Sem catálogo navegável</li>
+                    <li>Agendamento via formulário genérico</li>
+                    <li>Visitante sai sem decisão</li>
+                    <li>Sem conteúdo educativo</li>
+                    <li>Leads frios e desqualificados</li>
+                </ul>
+            </div>
+
+            <div class="comparison-box after">
+                <h3>✅ Site Novo</h3>
+                <ul>
+                    <li>Catálogo completo com filtros</li>
+                    <li>Marca, modelo, preço, benefícios em cada óculos</li>
+                    <li>Cliente navega por necessidade</li>
+                    <li>Agendamento online rápido</li>
+                    <li>Visitante marca consulta</li>
+                    <li>Conteúdo educativo aumenta confiança</li>
+                    <li>Leads quentes e pré-qualificados</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p><strong>Ótica Lauro Caxias</strong> — Saúde e estilo no olhar desde 1971.</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">Design conceitual por CaLopes Soluções Inteligentes</p>
+        </div>
+    </footer>
+</body>
+</html>
