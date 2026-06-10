@@ -74,6 +74,26 @@ STRATEGY_CONFIGS = {
         rr_ratio=1.5,
         risk_percentage=0.6,
     ),
+    'larry_williams': EMACrossoverParams(
+        ema_fast=9,  # EMA 9 for breakout confirmation
+        ema_slow=20,
+        rsi_period=14,
+        rsi_overbought=70,
+        rsi_oversold=30,
+        atr_multiplier=2.0,  # 5-day breakout
+        rr_ratio=2.0,
+        risk_percentage=0.8,
+    ),
+    'palex_pc': EMACrossoverParams(
+        ema_fast=21,  # EMA 21 for pullback setup
+        ema_slow=50,
+        rsi_period=14,
+        rsi_overbought=70,
+        rsi_oversold=30,
+        atr_multiplier=1.5,  # Tighter stops on pullback
+        rr_ratio=2.5,  # Higher RR on pullback
+        risk_percentage=0.8,
+    ),
 }
 
 
