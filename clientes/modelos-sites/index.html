@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelos de Sites - CaLopes Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .logo {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .model-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .model-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+        }
+
+        .model-header {
+            background: linear-gradient(135deg, #00A3E0 0%, #0A1A3D 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .model-header h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .model-header p {
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+
+        .model-body {
+            padding: 25px;
+        }
+
+        .model-body h3 {
+            color: #0A1A3D;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .features li {
+            padding: 8px 0;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .features li:before {
+            content: "✓ ";
+            color: #00A3E0;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .model-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .status-ready {
+            background: #D4EDDA;
+            color: #155724;
+        }
+
+        .status-soon {
+            background: #FFF3CD;
+            color: #856404;
+        }
+
+        .btn-demo {
+            display: inline-block;
+            background: #00A3E0;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .btn-demo:hover {
+            background: #0088B4;
+        }
+
+        .btn-docs {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #0A1A3D;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            margin-bottom: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .btn-docs:hover {
+            background: #e0e0e0;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .coming-soon {
+            opacity: 0.7;
+        }
+
+        .coming-soon .btn-demo {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin-top: 60px;
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .info-section h2 {
+            color: #0A1A3D;
+            margin-bottom: 20px;
+        }
+
+        .info-section p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn-demo, .btn-docs {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🎨</div>
+            <h1>Modelos de Sites Profissionais</h1>
+            <p>Templates React prontos para seu cliente — customize em minutos</p>
+        </header>
+
+        <!-- MODELOS DISPONÍVEIS -->
+        <div class="models-grid">
+            <!-- ÓTICAS -->
+            <div class="model-card">
+                <div class="model-header">
+                    <h2>👓 ÓTICAS</h2>
+                    <p>Consultórios e lojas de óculos</p>
+                </div>
+                <div class="model-body">
+                    <span class="model-status status-ready">✓ Disponível Agora</span>
+
+                    <h3>Páginas Incluídas:</h3>
+                    <ul class="features">
+                        <li>Home com hero</li>
+                        <li>Sobre (história, team)</li>
+                        <li>Serviços detalhados</li>
+                        <li>Catálogo de produtos</li>
+                        <li>Agendamento online</li>
+                        <li>Blog de saúde visual</li>
+                    </ul>
+
+                    <div class="buttons">
+                        <button class="btn-demo" onclick="window.open('OTICAS', '_blank')">
+                            👁️ Ver Demonstração
+                        </button>
+                        <button class="btn-docs" onclick="window.open('OTICAS/SETUP.md', '_blank')">
+                            📖 Documentação
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONSULTÓRIO -->
+            <div class="model-card coming-soon">
+                <div class="model-header">
+                    <h2>📋 CONSULTÓRIO</h2>
+                    <p>Médicos, dentistas, psicólogos</p>
+                </div>
+                <div class="model-body">
+                    <span class="model-status status-soon">⏳ Em Breve</span>
+
+                    <h3>Será incluído:</h3>
+                    <ul class="features">
+                        <li>Especialidades</li>
+                        <li>Curriculum profissional</li>
+                        <li>Agendamento integrado</li>
+                        <li>Galeria de ambiente</li>
+                        <li>Depoimentos de pacientes</li>
+                    </ul>
+
+                    <div class="buttons">
+                        <button class="btn-demo disabled">👁️ Ver Demonstração</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E-COMMERCE -->
+            <div class="model-card coming-soon">
+                <div class="model-header">
+                    <h2>🛒 E-COMMERCE</h2>
+                    <p>Lojas online e vendas digitais</p>
+                </div>
+                <div class="model-body">
+                    <span class="model-status status-soon">⏳ Em Breve</span>
+
+                    <h3>Será incluído:</h3>
+                    <ul class="features">
+                        <li>Carrinho de compras</li>
+                        <li>Categorias de produtos</li>
+                        <li>Integração de pagamento</li>
+                        <li>Checkout seguro</li>
+                        <li>Histórico de pedidos</li>
+                    </ul>
+
+                    <div class="buttons">
+                        <button class="btn-demo disabled">👁️ Ver Demonstração</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERVIÇOS -->
+            <div class="model-card coming-soon">
+                <div class="model-header">
+                    <h2>🔧 SERVIÇOS</h2>
+                    <p>Encanador, eletricista, design</p>
+                </div>
+                <div class="model-body">
+                    <span class="model-status status-soon">⏳ Em Breve</span>
+
+                    <h3>Será incluído:</h3>
+                    <ul class="features">
+                        <li>Portfolio de trabalhos</li>
+                        <li>Orçamento online</li>
+                        <li>Depoimentos de clientes</li>
+                        <li>Galeria de fotos</li>
+                        <li>Mapa de cobertura</li>
+                    </ul>
+
+                    <div class="buttons">
+                        <button class="btn-demo disabled">👁️ Ver Demonstração</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESTAURANTE -->
+            <div class="model-card coming-soon">
+                <div class="model-header">
+                    <h2>🍽️ RESTAURANTE</h2>
+                    <p>Restaurantes, bares, cafés</p>
+                </div>
+                <div class="model-body">
+                    <span class="model-status status-soon">⏳ Em Breve</span>
+
+                    <h3>Será incluído:</h3>
+                    <ul class="features">
+                        <li>Cardápio interativo</li>
+                        <li>Galeria de pratos</li>
+                        <li>Horário e localização</li>
+                        <li>Reservas de mesa</li>
+                        <li>Integração de delivery</li>
+                    </ul>
+
+                    <div class="buttons">
+                        <button class="btn-demo disabled">👁️ Ver Demonstração</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BELEZA -->
+            <div class="model-card coming-soon">
+                <div class="model-header">
+                    <h2>💅 BELEZA</h2>
+                    <p>Salões, spas, esteticistas</p>
+                </div>
+                <div class="model-body">
+                    <span class="model-status status-soon">⏳ Em Breve</span>
+
+                    <h3>Será incluído:</h3>
+                    <ul class="features">
+                        <li>Galeria de serviços</li>
+                        <li>Agendamento por tipo</li>
+                        <li>Portfolio de transformações</li>
+                        <li>Profissionais/especialistas</li>
+                        <li>Promoções e combos</li>
+                    </ul>
+
+                    <div class="buttons">
+                        <button class="btn-demo disabled">👁️ Ver Demonstração</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO DE INFORMAÇÕES -->
+        <div class="info-section">
+            <h2>❓ Como Funciona</h2>
+            <p><strong>1. Escolha o modelo</strong> que combina com seu cliente (ÓTICAS, CONSULTÓRIO, etc)</p>
+            <p><strong>2. Customize</strong> cores, textos, imagens e informações em poucos minutos</p>
+            <p><strong>3. Compartilhe</strong> a demonstração ao vivo ou faça o deploy em Vercel/Netlify</p>
+            <p><strong>4. Entregue</strong> com código pronto para manutenção futura</p>
+        </div>
+
+        <div class="info-section">
+            <h2>⚡ Características de Todos os Modelos</h2>
+            <ul class="features">
+                <li>Totalmente responsivo (mobile, tablet, desktop)</li>
+                <li>React moderno + Tailwind CSS</li>
+                <li>Fácil de customizar cores e conteúdo</li>
+                <li>Deploy simples em Vercel ou Netlify</li>
+                <li>Otimizado para conversão</li>
+                <li>Suporte a SEO básico</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>🚀 <strong>CaLopes Soluções Inteligentes</strong></p>
+            <p>Transformando atendimento em vendas com tecnologia</p>
+        </footer>
+    </div>
+</body>
+</html>
