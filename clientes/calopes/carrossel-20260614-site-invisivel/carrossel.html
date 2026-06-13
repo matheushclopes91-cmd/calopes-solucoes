@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrossel 02 - Seu site está te custando clientes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #000;
+    }
+
+    .slide {
+      width: 1080px;
+      height: 1350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 80px 60px;
+      position: relative;
+      font-size: 24px;
+      line-height: 1.5;
+      color: #F5F5F5;
+    }
+
+    /* Alternar fundos entre slides */
+    .slide.dark {
+      background: linear-gradient(135deg, #0A0A0F 0%, #1A1A2E 100%);
+    }
+
+    .slide.light {
+      background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+      color: #0A0A0F;
+    }
+
+    .slide.accent {
+      background: linear-gradient(135deg, #00AAFF 0%, #0088CC 100%);
+      color: #FFFFFF;
+    }
+
+    /* Logo - centralizado e em destaque */
+    .logo-container {
+      margin-bottom: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-container svg {
+      filter: drop-shadow(0 0 20px rgba(0, 170, 255, 0.25));
+    }
+
+    .slide.light .logo-container svg {
+      filter: drop-shadow(0 0 20px rgba(0, 88, 204, 0.15));
+    }
+
+    .slide.accent .logo-container svg {
+      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.15));
+    }
+
+    /* Page counter */
+    .page-counter {
+      position: absolute;
+      top: 40px;
+      right: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: #9CA3AF;
+      opacity: 0.8;
+    }
+
+    .slide.light .page-counter {
+      color: #666;
+    }
+
+    /* Content */
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* Títulos */
+    .slide h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 72px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 40px;
+      letter-spacing: -0.035em;
+      max-width: 95%;
+    }
+
+    .slide h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 54px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 30px;
+      letter-spacing: -0.035em;
+      max-width: 95%;
+    }
+
+    /* Corpo */
+    .slide p {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      max-width: 90%;
+    }
+
+    /* Lista de checklist */
+    .checklist {
+      list-style: none;
+      text-align: left;
+      display: inline-block;
+      font-size: 22px;
+      line-height: 2;
+      margin: 30px 0;
+    }
+
+    .checklist li {
+      margin-bottom: 15px;
+    }
+
+    .checklist li::before {
+      content: "☐ ";
+      margin-right: 15px;
+      color: #9CA3AF;
+    }
+
+    .slide.light .checklist li::before {
+      color: #999;
+    }
+
+    /* Setas em destaque azul */
+    .arrow {
+      color: #00AAFF;
+      font-weight: 700;
+    }
+
+    .slide.light .arrow {
+      color: #0088CC;
+    }
+
+    /* CTA final */
+    .cta-final {
+      text-align: center;
+    }
+
+    .cta-final h2 {
+      font-size: 52px;
+      margin-bottom: 40px;
+    }
+
+    .cta-final p {
+      font-size: 24px;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    /* Linha divisória */
+    .divider {
+      width: 80px;
+      height: 4px;
+      background: #00AAFF;
+      margin: 30px auto;
+      border-radius: 2px;
+    }
+
+    .slide.light .divider {
+      background: #0088CC;
+    }
+
+    .slide.accent .divider {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Spacing helpers */
+    .spacer {
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- SLIDE 1: CAPA -->
+<div class="slide dark">
+  <div class="page-counter">01/07</div>
+  <div class="logo-container" style="display: flex; align-items: center; gap: 20px;">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 90px; height: 90px; flex-shrink: 0;">
+      <!-- Checkmark círculo -->
+      <circle cx="50" cy="50" r="45" fill="none" stroke="#00AAFF" stroke-width="3"/>
+      <path d="M 30 50 L 45 65 L 70 40" fill="none" stroke="#00AAFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div style="font-family: Montserrat, sans-serif; font-weight: 900; font-size: 48px; letter-spacing: -1px; line-height: 1;">
+      <span style="color: #00AAFF;">Ca</span><span style="color: #F5F5F5;">Lopes</span>
+    </div>
+  </div>
+  <div class="content">
+    <h1>Seu site está afastando clientes.</h1>
+    <p style="font-size: 28px; margin-top: 30px; color: #9CA3AF;">Mesmo que você ache que está tudo bem.</p>
+  </div>
+</div>
+
+<!-- SLIDE 2: SETUP -->
+<div class="slide light">
+  <div class="page-counter">02/07</div>
+  <div class="logo-container" style="display: flex; align-items: center; gap: 20px;">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 90px; height: 90px; flex-shrink: 0;">
+      <!-- Checkmark círculo -->
+      <circle cx="50" cy="50" r="45" fill="none" stroke="#0088CC" stroke-width="3"/>
+      <path d="M 30 50 L 45 65 L 70 40" fill="none" stroke="#0088CC" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div style="font-family: Montserrat, sans-serif; font-weight: 900; font-size: 48px; letter-spacing: -1px; line-height: 1; color: #0A0A0F;">
+      <span style="color: #0088CC;">Ca</span><span>Lopes</span>
+    </div>
+  </div>
+  <div class="content">
+    <h2>Antes de qualquer compra, o cliente pesquisa.</h2>
+    <div class="divider"></div>
+    <p>E a primeira coisa que ele faz é abrir o Google.</p>
+    <p style="margin-top: 40px;">O que ele encontra — ou não encontra — define se ele vai chamar você ou o concorrente.</p>
+  </div>
+</div>
+
+<!-- SLIDE 3: CHECKLIST -->
+<div class="slide dark">
+  <div class="page-counter">03/07</div>
+  <div class="logo-container" style="display: flex; align-items: center; gap: 20px;">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 90px; height: 90px; flex-shrink: 0;">
+      <!-- Checkmark círculo -->
+      <circle cx="50" cy="50" r="45" fill="none" stroke="#00AAFF" stroke-width="3"/>
+      <path d="M 30 50 L 45 65 L 70 40" fill="none" stroke="#00AAFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div style="font-family: Montserrat, sans-serif; font-weight: 900; font-size: 48px; letter-spacing: -1px; line-height: 1;">
+      <span style="color: #00AAFF;">Ca</span><span style="color: #F5F5F5;">Lopes</span>
+    </div>
+  </div>
+  <div class="content">
+    <h2 style="margin-bottom: 50px;">5 sinais que seu site está te custando clientes</h2>
+    <ul class="checklist">
+      <li>Não abre bem no celular</li>
+      <li>Horário de funcionamento errado ou ausente</li>
+      <li>Sem botão de WhatsApp visível</li>
+      <li>Não aparece no Google quando pesquisam</li>
+      <li>Última atualização há mais de 1 ano</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SLIDE 4: CUSTO INVISÍVEL -->
+<div class="slide accent">
+  <div class="page-counter">04/07</div>
+  <div class="logo-container" style="display: flex; align-items: center; gap: 20px;">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 90px; height: 90px; flex-shrink: 0;">
+      <!-- Checkmark círculo -->
+      <circle cx="50" cy="50" r="45" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+      <path d="M 30 50 L 45 65 L 70 40" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div style="font-family: Montserrat, sans-serif; font-weight: 900; font-size: 48px; letter-spacing: -1px; line-height: 1;">
+      <span style="color: #FFFFFF;">Ca</span><span style="color: #FFFFFF;">Lopes</span>
+    </div>
+  </div>
+  <div class="content">
+    <h2>Cada um desses problemas é um cliente que chegou até você,</h2>
+    <p style="margin-top: 40px;">não encontrou o que precisava,</p>
+    <p style="margin-top: 20px;">e foi embora sem avisar.</p>
+    <div class="divider" style="background: rgba(255, 255, 255, 0.3);"></div>
+    <p style="margin-top: 40px; color: rgba(255, 255, 255, 0.9);">Silencioso. Invisível. Todo dia.</p>
+  </div>
+</div>
+
+<!-- SLIDE 5: O QUE O CLIENTE PENSA -->
+<div class="slide light">
+  <div class="page-counter">05/07</div>
+  <div class="logo-container" style="display: flex; align-items: center; gap: 20px;">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 90px; height: 90px; flex-shrink: 0;">
+      <!-- Checkmark círculo -->
+      <circle cx="50" cy="50" r="45" fill="none" stroke="#0088CC" stroke-width="3"/>
+      <path d="M 30 50 L 45 65 L 70 40" fill="none" stroke="#0088CC" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div style="font-family: Montserrat, sans-serif; font-weight: 900; font-size: 48px; letter-spacing: -1px; line-height: 1; color: #0A0A0F;">
+      <span style="color: #0088CC;">Ca</span><span>Lopes</span>
+    </div>
+  </div>
+  <div class="content">
+    <h2>Quando o site não passa confiança,</h2>
+    <p style="margin-top: 40px;">o cliente não fala nada.</p>
+    <div class="divider"></div>
+    <p style="margin-top: 40px;">Ele simplesmente vai pro próximo resultado no Google.</p>
+    <p style="margin-top: 40px;">E esse próximo resultado é o seu concorrente.</p>
+  </div>
+</div>
+
+<!-- SLIDE 6: SOLUÇÃO -->
+<div class="slide dark">
+  <div class="page-counter">06/07</div>
+  <div class="logo-container" style="display: flex; align-items: center; gap: 20px;">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 90px; height: 90px; flex-shrink: 0;">
+      <!-- Checkmark círculo -->
+      <circle cx="50" cy="50" r="45" fill="none" stroke="#00AAFF" stroke-width="3"/>
+      <path d="M 30 50 L 45 65 L 70 40" fill="none" stroke="#00AAFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div style="font-family: Montserrat, sans-serif; font-weight: 900; font-size: 48px; letter-spacing: -1px; line-height: 1;">
+      <span style="color: #00AAFF;">Ca</span><span style="color: #F5F5F5;">Lopes</span>
+    </div>
+  </div>
+  <div class="content">
+    <h2>Um site que funciona de verdade:</h2>
+    <div style="text-align: left; display: inline-block; margin-top: 50px; font-size: 24px; line-height: 2;">
+      <p><span class="arrow">→</span> Aparece quando pesquisam pelo seu serviço</p>
+      <p><span class="arrow">→</span> Mostra horário, endereço e contato de cara</p>
+      <p><span class="arrow">→</span> Tem botão de WhatsApp que abre na hora</p>
+      <p><span class="arrow">→</span> Carrega rápido no celular</p>
+      <p><span class="arrow">→</span> Passa a mesma confiança do seu atendimento</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: CTA FINAL -->
+<div class="slide accent">
+  <div class="page-counter">07/07</div>
+  <div class="logo-container" style="margin-bottom: 80px; display: flex; align-items: center; gap: 20px;">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 90px; height: 90px; flex-shrink: 0;">
+      <!-- Checkmark círculo -->
+      <circle cx="50" cy="50" r="45" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+      <path d="M 30 50 L 45 65 L 70 40" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div style="font-family: Montserrat, sans-serif; font-weight: 900; font-size: 48px; letter-spacing: -1px; line-height: 1;">
+      <span style="color: #FFFFFF;">Ca</span><span style="color: #FFFFFF;">Lopes</span>
+    </div>
+  </div>
+  <div class="content">
+    <h2>Quer que eu dê uma olhada no seu site?</h2>
+    <div class="divider" style="background: rgba(255, 255, 255, 0.3); margin-top: 60px;"></div>
+    <p style="margin-top: 60px; font-size: 26px;">Manda o link no WhatsApp.</p>
+    <p style="margin-top: 30px; font-size: 22px; color: rgba(255, 255, 255, 0.9);">Em até 24h te devolvo uma análise gratuita do que está afastando clientes.</p>
+  </div>
+</div>
+
+</body>
+</html>
