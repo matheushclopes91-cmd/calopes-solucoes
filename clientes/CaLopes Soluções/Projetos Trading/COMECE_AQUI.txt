@@ -1,0 +1,158 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                                                               ║
+║          📊 SISTEMA DE TRADING LARRY WILLIAMS — PINE SCRIPT V6              ║
+║                                                                               ║
+║                    Projeto profissional de análise técnica                   ║
+║                    para TradingView com identificação de                     ║
+║                    setups 9.1, 9.2, 9.3 e Ponto de Controle                ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+
+🚀 COMEÇAR RÁPIDO (5 MINUTOS)
+────────────────────────────────────────────────────────────────────────────────
+
+1. Abra: README.md
+   └─ Entenda o que é o sistema
+
+2. Leia: docs/setup-guia.md
+   └─ Siga os passos para instalar no TradingView
+
+3. Copie: pine-script/indicador-larry-williams.pine
+   └─ Cole no Pine Script Editor do TradingView
+
+4. Customize: Os parâmetros no próprio TradingView
+
+PRONTO! Você tem o indicador rodando.
+
+
+📚 APRENDER PROFUNDAMENTE (1-2 HORAS)
+────────────────────────────────────────────────────────────────────────────────
+
+1. README.md .......................... Visão geral do projeto
+2. docs/metodologia.md ............... Como funcionam os setups
+3. docs/setup-guia.md ................ Passo-a-passo de instalação
+4. config/parametros.json ............ Configurações por estilo
+
+
+🧪 FAZER BACKTEST (30-60 MINUTOS)
+────────────────────────────────────────────────────────────────────────────────
+
+1. Copie: pine-script/strategy-larry-williams.pine
+2. Cole no Pine Script Editor
+3. Adicione ao gráfico
+4. Abra Strategy Tester (lado direito)
+5. Configure datas e clique "Start Backtest"
+6. Documente resultados em docs/backtest-resultados.md
+
+
+📖 ÍNDICE COMPLETO
+────────────────────────────────────────────────────────────────────────────────
+
+Abra: INDEX.md
+└─ Navegação completa do projeto
+
+
+🎯 ESTRUTURA DAS PASTAS
+────────────────────────────────────────────────────────────────────────────────
+
+📁 Projetos Trading/
+│
+├── README.md ........................ Documentação principal
+├── INDEX.md ......................... Índice e navegação
+├── COMECE_AQUI.txt .................. Este arquivo
+│
+├── 📁 pine-script/
+│   ├── indicador-larry-williams.pine (copie e use no TradingView)
+│   └── strategy-larry-williams.pine  (para backtest)
+│
+├── 📁 docs/
+│   ├── setup-guia.md ............... Como instalar (passo-a-passo)
+│   ├── metodologia.md .............. Explicação dos setups
+│   └── backtest-resultados.md ...... Histórico de testes
+│
+└── 📁 config/
+    └── parametros.json ............ Configurações recomendadas
+
+
+⚡ PRÓXIMOS PASSOS
+────────────────────────────────────────────────────────────────────────────────
+
+AGORA:
+  [ ] Ler README.md
+  [ ] Seguir docs/setup-guia.md
+  [ ] Copiar indicador para TradingView
+
+NAS PRÓXIMAS 2 SEMANAS:
+  [ ] Observar sinais em gráfico live
+  [ ] Ler docs/metodologia.md completamente
+  [ ] Fazer primeiro backtest
+
+NAS PRÓXIMAS 4 SEMANAS:
+  [ ] Testar em múltiplos timeframes
+  [ ] Otimizar parâmetros conforme necessário
+  [ ] Fazer forward test (paper trading)
+
+DEPOIS (SE QUISER DINHEIRO REAL):
+  [ ] Começar com posição mínima
+  [ ] Rastrear todos os sinais
+  [ ] Aumentar conforme confiança
+
+
+⚠️ AVISOS IMPORTANTES
+────────────────────────────────────────────────────────────────────────────────
+
+❗ Não há garantia de lucro
+   → Passado não garante futuro
+
+❗ Risco é real
+   → Você pode perder dinheiro
+
+❗ Comece pequeno
+   → Nunca aposto tudo em uma estratégia
+
+❗ Emocional mata
+   → Tenha disciplina e siga o plano
+
+
+🎓 RECOMENDAÇÃO POR EXPERIÊNCIA
+────────────────────────────────────────────────────────────────────────────────
+
+VOCÊ JÁ CONHECE TRADING?
+  └─ Vá direto para: README.md + config/parametros.json
+  └─ Faça backtest imediatamente
+  └─ Ajuste conforme necessário
+
+INICIANTE EM TRADING?
+  └─ Comece com: docs/setup-guia.md
+  └─ Leia: docs/metodologia.md
+  └─ Observe gráficos por 1-2 semanas SEM operar
+  └─ Depois faça backtest
+
+
+💡 DICAS RÁPIDAS
+────────────────────────────────────────────────────────────────────────────────
+
+✓ Melhor ativo para começar: EURUSD
+✓ Melhor timeframe: 1H
+✓ Melhor configuração inicial: Básica (sem filtros)
+✓ Sempre use stop loss
+✓ Risco máximo: 1% do capital por trade
+✓ Nunca ignore o Ponto de Controle (PC)
+
+
+📞 DÚVIDAS?
+────────────────────────────────────────────────────────────────────────────────
+
+Email: matheushclopes91@gmail.com
+
+Problemas comuns? → docs/setup-guia.md (seção Troubleshooting)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+                         ✅ TUDO PRONTO PARA COMEÇAR!
+
+                    Abra "README.md" e vamos começar...
+
+═══════════════════════════════════════════════════════════════════════════════

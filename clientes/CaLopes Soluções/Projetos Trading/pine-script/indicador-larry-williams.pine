@@ -1,0 +1,221 @@
+//@version=6
+indicator("Larry Williams 9.1 | 9.2 | 9.3 + PC", overlay=true, max_bars_back=100)
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// LARRY WILLIAMS TRADING SYSTEM — INDICADOR v1.0
+// Pine Script v6 | TradingView
+// ═══════════════════════════════════════════════════════════════════════════════
+// Identificação automática dos setups Larry Williams com foco em Price Action
+// Suporta: Forex, Índices, Criptomoedas, Ações
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// INPUTS - MÉDIAS MÓVEIS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ema9 = ta.ema(close, 9)
+ema21 = ta.ema(close, 21)
+ema50 = ta.ema(close, 50)
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// INPUTS - CONFIGURAÇÕES DO USUÁRIO
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+group_emas = "━━ MÉDIAS MÓVEIS ━━"
+show_ema9 = input(true, "Mostrar EMA 9", group=group_emas)
+show_ema21 = input(true, "Mostrar EMA 21", group=group_emas)
+show_ema50 = input(true, "Mostrar EMA 50", group=group_emas)
+
+group_setups = "━━ SETUPS ━━"
+show_setup91 = input(true, "Setup 9.1", group=group_setups)
+show_setup92 = input(true, "Setup 9.2", group=group_setups)
+show_setup93 = input(true, "Setup 9.3", group=group_setups)
+show_pc = input(true, "Ponto de Controle", group=group_setups)
+
+group_filtros = "━━ FILTROS ━━"
+use_adx = input(false, "Usar ADX", group=group_filtros)
+adx_min = input(20, "ADX Mínimo", minval=10, maxval=50, group=group_filtros)
+use_volume = input(false, "Volume > Média", group=group_filtros)
+min_bars_between = input(5, "Barras mín entre sinais", minval=1, maxval=20, group=group_filtros)
+
+group_riscos = "━━ RISCO/RECOMPENSA ━━"
+tp_multiplier = input(2.0, "TP Multiplicador (RR)", minval=1.0, maxval=5.0, step=0.1, group=group_riscos)
+show_levels = input(true, "Mostrar Entrada/SL/TP", group=group_riscos)
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// CORES
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+color_ema9 = color.new(#1E90FF, 0)
+color_ema21 = color.new(#FF6B6B, 0)
+color_ema50 = color.new(#FFA500, 0)
+color_setup91_long = color.new(#00FF00, 40)
+color_setup91_short = color.new(#FF0000, 40)
+color_setup92_long = color.new(#00FF00, 50)
+color_setup92_short = color.new(#FF0000, 50)
+color_setup93_long = color.new(#00FF00, 70)
+color_setup93_short = color.new(#FF0000, 70)
+color_pc = color.new(#FFFF00, 50)
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// FUNÇÕES DE ANÁLISE
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Detecta tendência de alta
+f_uptrend() =>
+    ema9 > ema21 and ema21 > ema50 and ema9 > ema9[1] and ema21 > ema21[1] and ema50 > ema50[1]
+
+// Detecta tendência de baixa
+f_downtrend() =>
+    ema9 < ema21 and ema21 < ema50 and ema9 < ema9[1] and ema21 < ema21[1] and ema50 < ema50[1]
+
+// ADX - Força da tendência
+adx_value = ta.adx(14)
+
+// Volume acima da média
+vol_avg = ta.sma(volume, 20)
+vol_above_avg = volume > vol_avg
+
+// Passa em filtros?
+f_pass_filters() =>
+    (use_adx ? adx_value > adx_min : true) and
+    (use_volume ? vol_above_avg : true)
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// SETUP 9.1 — Toque na EMA 9
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Compra 9.1: Preço toca/cruza EMA9 em tendência de alta
+setup91_long =
+    f_uptrend() and
+    close > ema9 and
+    low <= ema9 and
+    close[1] < ema9[1] and
+    f_pass_filters()
+
+// Venda 9.1: Preço toca/cruza EMA9 em tendência de baixa
+setup91_short =
+    f_downtrend() and
+    close < ema9 and
+    high >= ema9 and
+    close[1] > ema9[1] and
+    f_pass_filters()
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// SETUP 9.2 — Toque na EMA 21
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Compra 9.2: Preço toca/cruza EMA21 em tendência de alta
+setup92_long =
+    f_uptrend() and
+    close > ema21 and
+    low <= ema21 and
+    close[1] < ema21[1] and
+    ema9 > ema21 and
+    f_pass_filters()
+
+// Venda 9.2: Preço toca/cruza EMA21 em tendência de baixa
+setup92_short =
+    f_downtrend() and
+    close < ema21 and
+    high >= ema21 and
+    close[1] > ema21[1] and
+    ema9 < ema21 and
+    f_pass_filters()
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// SETUP 9.3 — Toque na EMA 50
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Compra 9.3: Preço toca/cruza EMA50 em tendência de alta (máxima segurança)
+setup93_long =
+    f_uptrend() and
+    close > ema50 and
+    low <= ema50 and
+    close[1] < ema50[1] and
+    ema9 > ema21 and ema21 > ema50 and
+    f_pass_filters()
+
+// Venda 9.3: Preço toca/cruza EMA50 em tendência de baixa
+setup93_short =
+    f_downtrend() and
+    close < ema50 and
+    high >= ema50 and
+    close[1] > ema50[1] and
+    ema9 < ema21 and ema21 < ema50 and
+    f_pass_filters()
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// PONTO DE CONTROLE (PC)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// PC Long: Nova máxima rompendo máxima anterior (comprador)
+pc_long = high > high[1] and high[1] > high[2] and f_uptrend()
+
+// PC Short: Nova mínima rompendo mínima anterior (vendedor)
+pc_short = low < low[1] and low[1] < low[2] and f_downtrend()
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// PLOT - MÉDIAS MÓVEIS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+plot(show_ema9 ? ema9 : na, "EMA 9", color=color_ema9, linewidth=2)
+plot(show_ema21 ? ema21 : na, "EMA 21", color=color_ema21, linewidth=2)
+plot(show_ema50 ? ema50 : na, "EMA 50", color=color_ema50, linewidth=2)
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// PLOT - SINAIS DE ENTRADA
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Setup 9.1
+if show_setup91
+    if setup91_long
+        label.new(bar_index, high + 30 * syminfo.mintick, "SETUP 9.1",
+                  color=color.new(#00FF00, 100), textcolor=#00FF00, style=label.style_label_down, size=size.small)
+        arrow_long_1 = ta.valuewhen(setup91_long, close, 0)
+    if setup91_short
+        label.new(bar_index, low - 30 * syminfo.mintick, "SETUP 9.1",
+                  color=color.new(#FF0000, 100), textcolor=#FF0000, style=label.style_label_up, size=size.small)
+
+// Setup 9.2
+if show_setup92
+    if setup92_long
+        label.new(bar_index, high + 50 * syminfo.mintick, "SETUP 9.2",
+                  color=color.new(#00FF00, 100), textcolor=#00FF00, style=label.style_label_down, size=size.small)
+    if setup92_short
+        label.new(bar_index, low - 50 * syminfo.mintick, "SETUP 9.2",
+                  color=color.new(#FF0000, 100), textcolor=#FF0000, style=label.style_label_up, size=size.small)
+
+// Setup 9.3
+if show_setup93
+    if setup93_long
+        label.new(bar_index, high + 70 * syminfo.mintick, "SETUP 9.3",
+                  color=color.new(#00FF00, 100), textcolor=#00FF00, style=label.style_label_down, size=size.small)
+    if setup93_short
+        label.new(bar_index, low - 70 * syminfo.mintick, "SETUP 9.3",
+                  color=color.new(#FF0000, 100), textcolor=#FF0000, style=label.style_label_up, size=size.small)
+
+// Ponto de Controle
+if show_pc
+    if pc_long
+        label.new(bar_index, high + 10 * syminfo.mintick, "PC",
+                  color=color.new(#FFFF00, 100), textcolor=#FFFF00, style=label.style_label_down, size=size.tiny)
+    if pc_short
+        label.new(bar_index, low - 10 * syminfo.mintick, "PC",
+                  color=color.new(#FFFF00, 100), textcolor=#FFFF00, style=label.style_label_up, size=size.tiny)
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ALERTAS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+alertcondition(setup91_long, title="COMPRA 9.1", message="Setup 9.1 COMPRA")
+alertcondition(setup91_short, title="VENDA 9.1", message="Setup 9.1 VENDA")
+alertcondition(setup92_long, title="COMPRA 9.2", message="Setup 9.2 COMPRA")
+alertcondition(setup92_short, title="VENDA 9.2", message="Setup 9.2 VENDA")
+alertcondition(setup93_long, title="COMPRA 9.3", message="Setup 9.3 COMPRA")
+alertcondition(setup93_short, title="VENDA 9.3", message="Setup 9.3 VENDA")
+alertcondition(pc_long or pc_short, title="PONTO DE CONTROLE", message="Ponto de Controle detectado")
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// Versão 1.0 | Junho 2026 | CaLopes Soluções Inteligentes
+// ═══════════════════════════════════════════════════════════════════════════════

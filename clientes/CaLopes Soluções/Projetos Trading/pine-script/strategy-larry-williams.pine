@@ -1,0 +1,179 @@
+//@version=6
+strategy("Larry Williams 9.1 | 9.2 | 9.3 — Backtest", overlay=true,
+         default_qty_type=strategy.percent_of_equity, default_qty_value=10,
+         initial_capital=10000, commission_type=strategy.commission.percent, commission_value=0.001,
+         max_bars_back=100)
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// LARRY WILLIAMS TRADING SYSTEM — STRATEGY v1.0
+// Pine Script v6 | TradingView
+// ═══════════════════════════════════════════════════════════════════════════════
+// Strategy com backtest automático, gerenciamento de posição e estatísticas
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// INPUTS - MÉDIAS MÓVEIS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ema9 = ta.ema(close, 9)
+ema21 = ta.ema(close, 21)
+ema50 = ta.ema(close, 50)
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// INPUTS - CONFIGURAÇÕES
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+group_strategy = "━━ STRATEGY ━━"
+trade_setup91 = input(true, "Operar Setup 9.1", group=group_strategy)
+trade_setup92 = input(true, "Operar Setup 9.2", group=group_strategy)
+trade_setup93 = input(true, "Operar Setup 9.3", group=group_strategy)
+
+group_filtros = "━━ FILTROS ━━"
+use_adx = input(false, "Usar ADX", group=group_filtros)
+adx_min = input(20, "ADX Mínimo", minval=10, maxval=50, group=group_filtros)
+use_volume = input(false, "Volume > Média", group=group_filtros)
+
+group_riscos = "━━ RISCO/RECOMPENSA ━━"
+tp_multiplier = input(2.0, "TP Multiplicador", minval=1.0, maxval=5.0, step=0.1, group=group_riscos)
+risk_percent = input(1.0, "Risk % por trade", minval=0.1, maxval=5.0, step=0.1, group=group_riscos)
+
+group_horario = "━━ HORÁRIO ━━"
+use_horario = input(false, "Filtro horário", group=group_horario)
+hora_inicio = input(9, "Hora início (24h)", minval=0, maxval=23, group=group_horario)
+hora_fim = input(17, "Hora fim (24h)", minval=0, maxval=23, group=group_horario)
+
+group_backtest = "━━ BACKTEST ━━"
+data_inicio = input(timestamp("2023-01-01"), "Data início backtest", group=group_backtest)
+data_fim = input(timestamp("2026-06-13"), "Data fim backtest", group=group_backtest)
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// LÓGICA DE FILTROS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Verifica data do backtest
+in_backtest_period = time >= data_inicio and time <= data_fim
+
+// Verifica horário operacional
+dentro_horario = use_horario ? (hour >= hora_inicio and hour < hora_fim) : true
+
+// ADX
+adx_value = ta.adx(14)
+adx_ok = use_adx ? adx_value > adx_min : true
+
+// Volume
+vol_avg = ta.sma(volume, 20)
+vol_ok = use_volume ? volume > vol_avg : true
+
+// Filtro geral
+passa_filtros = adx_ok and vol_ok and dentro_horario
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ANÁLISE DE TENDÊNCIA
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+f_uptrend() =>
+    ema9 > ema21 and ema21 > ema50 and ema9 > ema9[1] and ema21 > ema21[1] and ema50 > ema50[1]
+
+f_downtrend() =>
+    ema9 < ema21 and ema21 < ema50 and ema9 < ema9[1] and ema21 < ema21[1] and ema50 < ema50[1]
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// SINAIS DE ENTRADA
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// SETUP 9.1
+setup91_long = trade_setup91 and f_uptrend() and close > ema9 and low <= ema9 and
+               close[1] < ema9[1] and passa_filtros
+
+setup91_short = trade_setup91 and f_downtrend() and close < ema9 and high >= ema9 and
+                close[1] > ema9[1] and passa_filtros
+
+// SETUP 9.2
+setup92_long = trade_setup92 and f_uptrend() and close > ema21 and low <= ema21 and
+               close[1] < ema21[1] and ema9 > ema21 and passa_filtros
+
+setup92_short = trade_setup92 and f_downtrend() and close < ema21 and high >= ema21 and
+                close[1] > ema21[1] and ema9 < ema21 and passa_filtros
+
+// SETUP 9.3
+setup93_long = trade_setup93 and f_uptrend() and close > ema50 and low <= ema50 and
+               close[1] < ema50[1] and ema9 > ema21 and ema21 > ema50 and passa_filtros
+
+setup93_short = trade_setup93 and f_downtrend() and close < ema50 and high >= ema50 and
+                close[1] > ema50[1] and ema9 < ema21 and ema21 < ema50 and passa_filtros
+
+// Sinal consolidado
+sinal_long = setup91_long or setup92_long or setup93_long
+sinal_short = setup91_short or setup92_short or setup93_short
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// CÁLCULO DE STOP LOSS E TAKE PROFIT
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Para LONG
+var float entry_long = na
+var float sl_long = na
+var float tp_long = na
+
+if sinal_long and in_backtest_period
+    entry_long := close
+    sl_long := low
+    distancia_sl = entry_long - sl_long
+    tp_long := entry_long + (distancia_sl * tp_multiplier)
+
+// Para SHORT
+var float entry_short = na
+var float sl_short = na
+var float tp_short = na
+
+if sinal_short and in_backtest_period
+    entry_short := close
+    sl_short := high
+    distancia_sl = sl_short - entry_short
+    tp_short := entry_short - (distancia_sl * tp_multiplier)
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// EXECUTAR TRADES
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+if sinal_long and in_backtest_period
+    strategy.entry("LONG", strategy.long)
+
+if sinal_short and in_backtest_period
+    strategy.entry("SHORT", strategy.short)
+
+// Close com Stop e Take Profit
+if strategy.position_size > 0
+    strategy.exit("CLOSE LONG", "LONG", stop=sl_long, limit=tp_long)
+
+if strategy.position_size < 0
+    strategy.exit("CLOSE SHORT", "SHORT", stop=sl_short, limit=tp_short)
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// VISUALIZAÇÃO
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Médias móveis
+plot(ema9, "EMA 9", color.new(#1E90FF, 0), linewidth=2)
+plot(ema21, "EMA 21", color.new(#FF6B6B, 0), linewidth=2)
+plot(ema50, "EMA 50", color.new(#FFA500, 0), linewidth=2)
+
+// Sinais
+plotshape(sinal_long and in_backtest_period, title="Long", style=shape.labelup,
+          location=location.belowbar, color=color.new(#00FF00, 0), textcolor=#00FF00, size=size.small)
+
+plotshape(sinal_short and in_backtest_period, title="Short", style=shape.labeldown,
+          location=location.abovebar, color=color.new(#FF0000, 0), textcolor=#FF0000, size=size.small)
+
+// Níveis de entrada
+plot(strategy.position_size > 0 ? entry_long : na, "Entry Long", #00FF00, linewidth=1, style=plot.style_linebr)
+plot(strategy.position_size > 0 ? sl_long : na, "SL Long", #FF0000, linewidth=1, style=plot.style_linebr)
+plot(strategy.position_size > 0 ? tp_long : na, "TP Long", #00FF00, linewidth=1, style=plot.style_linebr)
+
+plot(strategy.position_size < 0 ? entry_short : na, "Entry Short", #FF0000, linewidth=1, style=plot.style_linebr)
+plot(strategy.position_size < 0 ? sl_short : na, "SL Short", #00FF00, linewidth=1, style=plot.style_linebr)
+plot(strategy.position_size < 0 ? tp_short : na, "TP Short", #FF0000, linewidth=1, style=plot.style_linebr)
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// Versão 1.0 | Junho 2026 | CaLopes Soluções Inteligentes
+// ═══════════════════════════════════════════════════════════════════════════════

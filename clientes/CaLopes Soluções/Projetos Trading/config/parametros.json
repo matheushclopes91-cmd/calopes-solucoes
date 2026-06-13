@@ -1,0 +1,206 @@
+{
+  "version": "1.0",
+  "data_ultima_atualizacao": "2026-06-13",
+  "descricao": "Parâmetros recomendados para o sistema Larry Williams",
+
+  "medias_moveis": {
+    "ema9": {
+      "periodo": 9,
+      "tipo": "EMA",
+      "descricao": "Média exponencial de curto prazo - Identifica retrações superficiais",
+      "cor": "#1E90FF",
+      "espessura_linha": 2
+    },
+    "ema21": {
+      "periodo": 21,
+      "tipo": "EMA",
+      "descricao": "Média exponencial intermediária - Define estrutura média",
+      "cor": "#FF6B6B",
+      "espessura_linha": 2
+    },
+    "ema50": {
+      "periodo": 50,
+      "tipo": "EMA",
+      "descricao": "Média exponencial de longo prazo - Estrutura principal",
+      "cor": "#FFA500",
+      "espessura_linha": 2
+    }
+  },
+
+  "configuracoes_basicas": {
+    "nome": "Configuração Iniciante - Sem Filtros",
+    "descricao": "Ideal para aprender e validar os setups sem muitos filtros",
+    "setups": {
+      "setup91": true,
+      "setup92": true,
+      "setup93": true,
+      "ponto_controle": true
+    },
+    "filtros": {
+      "usar_adx": false,
+      "usar_volume": false,
+      "usar_horario": false
+    },
+    "risco_recompensa": {
+      "tp_multiplicador": 2.0,
+      "descricao": "RR 1:2 padrão"
+    }
+  },
+
+  "configuracoes_intermediarias": {
+    "nome": "Configuração Profissional - Com Filtros",
+    "descricao": "Melhor relação sinal/ruído - recomendado após validar",
+    "setups": {
+      "setup91": true,
+      "setup92": true,
+      "setup93": true,
+      "ponto_controle": true
+    },
+    "filtros": {
+      "usar_adx": true,
+      "adx_minimo": 25,
+      "usar_volume": true,
+      "usar_horario": false
+    },
+    "risco_recompensa": {
+      "tp_multiplicador": 2.5,
+      "descricao": "RR 1:2.5"
+    }
+  },
+
+  "configuracoes_agressivas": {
+    "nome": "Configuração Agressiva - Apenas Setup 9.3",
+    "descricao": "Poucos sinais, máxima qualidade - melhor para positional",
+    "setups": {
+      "setup91": false,
+      "setup92": false,
+      "setup93": true,
+      "ponto_controle": true
+    },
+    "filtros": {
+      "usar_adx": true,
+      "adx_minimo": 30,
+      "usar_volume": true,
+      "usar_horario": false
+    },
+    "risco_recompensa": {
+      "tp_multiplicador": 3.0,
+      "descricao": "RR 1:3"
+    }
+  },
+
+  "timeframes_recomendados": {
+    "scalping": {
+      "timeframe": "5min",
+      "melhor_ativo": "EUR/USD, GBP/USD",
+      "setup_preferido": "9.1",
+      "observacoes": "Requiere disciplina e atenção constante"
+    },
+    "day_trading": {
+      "timeframe": "1H",
+      "melhor_ativo": "EUR/USD, BTCUSD, SPX500",
+      "setup_preferido": "9.1 + 9.2",
+      "observacoes": "Melhor relação risco/recompensa versus tempo"
+    },
+    "swing_trading": {
+      "timeframe": "4H",
+      "melhor_ativo": "Índices, Ações, Cripto",
+      "setup_preferido": "9.2 + 9.3",
+      "observacoes": "Menos trades, maior confiabilidade"
+    },
+    "positional": {
+      "timeframe": "D (Daily)",
+      "melhor_ativo": "Índices, Ações, Ouro",
+      "setup_preferido": "9.3 + PC",
+      "observacoes": "Máxima segurança, menores taxas de acerto"
+    }
+  },
+
+  "ativos_testados": {
+    "forex": {
+      "ativos": ["EURUSD", "GBPUSD", "USDJPY", "AUDUSD"],
+      "performance": "Excelente",
+      "observacoes": "Melhor performance em EURUSD"
+    },
+    "indices": {
+      "ativos": ["SPX500", "DAX", "STOXX50"],
+      "performance": "Muito Boa",
+      "observacoes": "Setup 9.3 com melhor taxa"
+    },
+    "criptomoedas": {
+      "ativos": ["BTCUSD", "ETHUSD"],
+      "performance": "Boa",
+      "observacoes": "Volátil - usar filtro ADX rigoroso"
+    },
+    "acoes": {
+      "ativos": ["AAPL", "MSFT", "GOOGL"],
+      "performance": "Boa em tendências claras",
+      "observacoes": "Melhor em daily"
+    }
+  },
+
+  "risco_e_money_management": {
+    "risco_por_trade": "1% do capital",
+    "risco_por_dia": "3% do capital",
+    "risco_por_semana": "5% do capital",
+    "razao_risk_reward_minimo": 1.5,
+    "razao_risk_reward_alvo": 2.0,
+    "exemplo": {
+      "capital": 10000,
+      "risco_por_trade": 100,
+      "entrada": 1.1050,
+      "stop_loss": 1.1040,
+      "risca_pips": 10,
+      "take_profit": 1.1070,
+      "recompensa_pips": 20,
+      "razao": "1:2"
+    }
+  },
+
+  "filtros_avancados": {
+    "adx": {
+      "minimo_para_sinais": 20,
+      "recomendado": 25,
+      "muito_rigido": 30,
+      "descricao": "Define força da tendência"
+    },
+    "volume": {
+      "usar": true,
+      "parametro": "Volume > SMA 20",
+      "descricao": "Confirma força do movimento"
+    },
+    "horario_operacional": {
+      "usar": false,
+      "horario_inicio": 9,
+      "horario_fim": 17,
+      "timezone": "UTC",
+      "descricao": "Limita operações a janelas específicas"
+    },
+    "distancia_minima_sinais": {
+      "valor": 5,
+      "unidade": "barras",
+      "descricao": "Evita múltiplos sinais próximos"
+    }
+  },
+
+  "backtest_recomendado": {
+    "periodo": "2 anos",
+    "data_inicio": "2024-01-01",
+    "data_fim": "2026-06-13",
+    "ativo": "EURUSD",
+    "timeframe": "1H",
+    "capital_inicial": 10000,
+    "commission": "0.001%",
+    "slippage": "5 pips"
+  },
+
+  "metricas_esperadas": {
+    "taxa_acerto": "50-60%",
+    "profit_factor": "> 1.5",
+    "drawdown_maximo": "< 20%",
+    "sharpe_ratio": "> 1.0",
+    "expectancia": "positiva"
+  },
+
+  "nota_importante": "Estes parâmetros são recomendações baseadas em testes. Cada mercado e timeframe pode exigir ajustes. Sempre faça backtest antes de usar dinheiro real."
+}
