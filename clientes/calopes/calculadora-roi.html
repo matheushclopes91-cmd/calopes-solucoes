@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Descubra quanto seu negócio está perdendo. Calculadora de ROI gratuita para óticas e pequenos negócios locais.">
+    <meta name="robots" content="index, follow">
+    <title>Calculadora de ROI | CaLopes Soluções Inteligentes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='32' fill='%231A1A1A'/><circle cx='32' cy='32' r='28' fill='none' stroke='%2300A3E0' stroke-width='2'/><path d='M24 32l6 6 12-12' stroke='%2300A3E0' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1A1A1A;
+            color: #F5F5F5;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        /* ===== HEADER / NAVBAR ===== */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 163, 224, 0.1);
+            position: sticky;
+            top: 0;
+            background-color: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-svg {
+            width: 48px;
+            height: 48px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .brand-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: #00A3E0;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            padding: 100px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 163, 224, 0.05) 0%, transparent 100%);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 8vw, 56px);
+            margin-bottom: 20px;
+            color: #FFFFFF;
+            line-height: 1.2;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 4vw, 20px);
+            color: #A0A0A0;
+            margin-bottom: 40px;
+            animation: slideDown 0.8s ease-out 0.2s both;
+        }
+
+        .scroll-indicator {
+            display: inline-block;
+            animation: slideDown 0.8s ease-out 0.4s both;
+            color: #00A3E0;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        /* ===== CALCULADORA SECTION ===== */
+        .calculator-section {
+            padding: 80px 20px;
+            background-color: #121212;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .calculator-section h2 {
+            font-size: clamp(28px, 6vw, 48px);
+            text-align: center;
+            margin-bottom: 60px;
+            color: #FFFFFF;
+        }
+
+        .calculator-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #F5F5F5;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(0, 163, 224, 0.3);
+            background-color: #1A1A1A;
+            color: #F5F5F5;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #00A3E0;
+            box-shadow: 0 0 0 3px rgba(0, 163, 224, 0.1);
+            background-color: rgba(26, 26, 26, 0.8);
+        }
+
+        .form-group input::placeholder {
+            color: #808080;
+        }
+
+        /* ===== RESULTADO CARD ===== */
+        .result-card {
+            background-color: #00A3E0;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 50px;
+            animation: slideUp 0.8s ease-out;
+            box-shadow: 0 8px 32px rgba(0, 163, 224, 0.15);
+        }
+
+        .result-card p {
+            color: #1A1A1A;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .result-value {
+            font-size: clamp(32px, 8vw, 56px);
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .result-annual {
+            color: rgba(26, 26, 26, 0.8);
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .result-placeholder {
+            color: rgba(26, 26, 26, 0.6);
+            font-size: 16px;
+        }
+
+        /* ===== COMO GANHAR DE VOLTA SECTION ===== */
+        .solutions-section {
+            padding: 80px 20px;
+            background-color: #1A1A1A;
+            animation: fadeIn 1.4s ease-in-out;
+        }
+
+        .solutions-section h2 {
+            font-size: clamp(28px, 6vw, 48px);
+            text-align: center;
+            margin-bottom: 60px;
+            color: #FFFFFF;
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .solution-card {
+            background-color: #121212;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 163, 224, 0.2);
+            transition: all 0.4s ease;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .solution-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .solution-card:hover {
+            border-color: #00A3E0;
+            box-shadow: 0 8px 32px rgba(0, 163, 224, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .solution-number {
+            font-size: 24px;
+            color: #00A3E0;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .solution-title {
+            font-size: 20px;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .solution-description {
+            font-size: 14px;
+            color: #A0A0A0;
+            line-height: 1.6;
+        }
+
+        /* ===== FORM SECTION ===== */
+        .form-section {
+            padding: 80px 20px;
+            background-color: #121212;
+            animation: fadeIn 1.6s ease-in-out;
+        }
+
+        .form-section h2 {
+            font-size: clamp(28px, 6vw, 48px);
+            text-align: center;
+            margin-bottom: 60px;
+            color: #FFFFFF;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #1A1A1A;
+            padding: 50px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 163, 224, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-row.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group input[type="submit"] {
+            grid-column: 1 / -1;
+            background-color: #00A3E0;
+            color: #1A1A1A;
+            border: none;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 16px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #0080B8;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 163, 224, 0.2);
+        }
+
+        .form-group input[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        .form-guarantee {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #808080;
+        }
+
+        .form-guarantee .check {
+            color: #00A3E0;
+            margin-right: 5px;
+        }
+
+        .error-message {
+            color: #FF6B6B;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: #121212;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 163, 224, 0.1);
+            font-size: 14px;
+            color: #A0A0A0;
+        }
+
+        footer a {
+            color: #00A3E0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #FFFFFF;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .logo-svg {
+                width: 40px;
+                height: 40px;
+            }
+
+            .brand-name {
+                font-size: 14px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .calculator-section,
+            .solutions-section,
+            .form-section {
+                padding: 60px 20px;
+            }
+
+            .form-container {
+                padding: 30px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .solutions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-card {
+                padding: 30px;
+            }
+
+            .form-group input,
+            .form-group select {
+                min-height: 44px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 15px 0;
+            }
+
+            .logo-svg {
+                width: 36px;
+                height: 36px;
+            }
+
+            .brand-name {
+                font-size: 12px;
+            }
+
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .calculator-section,
+            .solutions-section,
+            .form-section {
+                padding: 40px 20px;
+            }
+
+            .solutions-section h2,
+            .calculator-section h2,
+            .form-section h2 {
+                margin-bottom: 40px;
+            }
+
+            .form-container {
+                padding: 20px;
+                border: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                    <circle cx="32" cy="32" r="32" fill="#1A1A1A"/>
+                    <circle cx="32" cy="32" r="28" fill="none" stroke="#00A3E0" stroke-width="2"/>
+                    <path d="M24 32l6 6 12-12" stroke="#00A3E0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="brand-name">CaLopes</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Descubra quanto seu negócio está perdendo</h1>
+            <p>Análise rápida em 30 segundos. Sem compromisso.</p>
+            <div class="scroll-indicator">↓ Role para começar</div>
+        </div>
+    </section>
+
+    <!-- CALCULADORA SECTION -->
+    <section class="calculator-section">
+        <div class="container">
+            <h2>Calculadora de ROI</h2>
+            <div class="calculator-wrapper">
+                <div class="form-group">
+                    <label for="ramo">Qual é seu ramo de negócio?</label>
+                    <select id="ramo" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="otica">Ótica</option>
+                        <option value="joalheria">Joalheria</option>
+                        <option value="estetica">Estética</option>
+                        <option value="consultorio">Consultório</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ticket">Qual é seu ticket médio mensal? (R$)</label>
+                    <input type="number" id="ticket" placeholder="ex: 5000" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientes">Quantos clientes você recebe por mês?</label>
+                    <input type="number" id="clientes" placeholder="ex: 50" min="0" required>
+                </div>
+
+                <div class="result-card">
+                    <p>Você está perdendo por mês:</p>
+                    <div class="result-value" id="resultMensal">R$ 0,00</div>
+                    <div class="result-annual" id="resultAnual">Anualmente: R$ 0,00</div>
+                    <div class="result-placeholder" id="resultPlaceholder">Preencha os valores acima</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMO GANHAR DE VOLTA SECTION -->
+    <section class="solutions-section">
+        <div class="container">
+            <h2>Site + WhatsApp: a combinação que vende</h2>
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <div class="solution-number">01</div>
+                    <div class="solution-title">Site Profissional</div>
+                    <p class="solution-description">Um site responsivo que converte visitantes em clientes. Apresenta seu negócio 24h, reduz objeções e aumenta confiança. Integrado com WhatsApp para contato direto.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-number">02</div>
+                    <div class="solution-title">IA no WhatsApp</div>
+                    <p class="solution-description">Seu negócio recebe mensagens que nunca viram clientes? Atendimento inteligente que nunca dorme. Responde automaticamente, qualifica interessados e agendar consultas — reduzindo perdas por falta de retorno rápido.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORM SECTION -->
+    <section class="form-section">
+        <div class="container">
+            <h2>Agendar consultoria</h2>
+            <div class="form-container">
+                <form id="agendamentoForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" required>
+                            <div class="error-message" id="erroNome"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                            <div class="error-message" id="erroEmail"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="whatsapp">WhatsApp (com DDD)</label>
+                            <input type="text" id="whatsapp" placeholder="11 99999-9999" required>
+                            <div class="error-message" id="erroWhatsapp"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="ramo-form">Tipo de negócio</label>
+                            <select id="ramo-form" required>
+                                <option value="">Selecione uma opção</option>
+                                <option value="otica">Ótica</option>
+                                <option value="joalheria">Joalheria</option>
+                                <option value="estetica">Estética</option>
+                                <option value="consultorio">Consultório</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem (opcional)</label>
+                            <input type="text" id="mensagem" placeholder="Conte mais sobre seu desafio">
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <input type="submit" value="Agendar Consultoria Gratuita — 15 minutos">
+                        </div>
+                    </div>
+
+                    <div class="form-guarantee">
+                        <span class="check">✓</span> Sem compromisso. Reembolso em 7 dias.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>© 2024 CaLopes Soluções Inteligentes | Caxias do Sul, RS</p>
+            <p style="margin-top: 15px;">
+                <a href="https://wa.me/5554991234567" target="_blank">Falar no WhatsApp</a> •
+                <a href="mailto:contato@calopes.com.br">contato@calopes.com.br</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== CALCULADORA DE ROI =====
+        const ticketInput = document.getElementById('ticket');
+        const clientesInput = document.getElementById('clientes');
+        const resultMensal = document.getElementById('resultMensal');
+        const resultAnual = document.getElementById('resultAnual');
+        const resultPlaceholder = document.getElementById('resultPlaceholder');
+
+        function calcularROI() {
+            const ticket = parseFloat(ticketInput.value) || 0;
+            const clientes = parseFloat(clientesInput.value) || 0;
+
+            if (ticket === 0 || clientes === 0) {
+                resultMensal.textContent = 'R$ 0,00';
+                resultAnual.textContent = 'Anualmente: R$ 0,00';
+                resultPlaceholder.style.display = 'block';
+                return;
+            }
+
+            const perdaMensal = ticket * clientes * 0.30;
+            const perdaAnual = perdaMensal * 12;
+
+            resultMensal.textContent = formatarBRL(perdaMensal);
+            resultAnual.textContent = `Anualmente: ${formatarBRL(perdaAnual)}`;
+            resultPlaceholder.style.display = 'none';
+        }
+
+        function formatarBRL(valor) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(valor);
+        }
+
+        ticketInput.addEventListener('input', calcularROI);
+        clientesInput.addEventListener('input', calcularROI);
+
+        // ===== VALIDAÇÃO DO FORMULÁRIO =====
+        function validarEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        function validarWhatsapp(whatsapp) {
+            const apenasNumeros = whatsapp.replace(/\D/g, '');
+            return apenasNumeros.length === 11;
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const whatsapp = document.getElementById('whatsapp').value.trim();
+            const ramoForm = document.getElementById('ramo-form').value;
+            const mensagem = document.getElementById('mensagem').value.trim();
+
+            // Limpar mensagens de erro
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+                el.textContent = '';
+            });
+
+            let temErro = false;
+
+            if (!nome) {
+                document.getElementById('erroNome').textContent = 'Nome é obrigatório';
+                document.getElementById('erroNome').style.display = 'block';
+                temErro = true;
+            }
+
+            if (!validarEmail(email)) {
+                document.getElementById('erroEmail').textContent = 'Email inválido';
+                document.getElementById('erroEmail').style.display = 'block';
+                temErro = true;
+            }
+
+            if (!validarWhatsapp(whatsapp)) {
+                document.getElementById('erroWhatsapp').textContent = 'WhatsApp inválido (11 dígitos)';
+                document.getElementById('erroWhatsapp').style.display = 'block';
+                temErro = true;
+            }
+
+            if (!ramoForm) {
+                document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            if (temErro) {
+                return;
+            }
+
+            // TODO: Integrar com email/WhatsApp API
+            console.log({
+                nome,
+                email,
+                whatsapp,
+                ramo: ramoForm,
+                mensagem
+            });
+
+            alert('Obrigado! Entramos em contato em breve via WhatsApp. 📱');
+            document.getElementById('agendamentoForm').reset();
+        }
+
+        // ===== FORMATAÇÃO DE INPUT WHATSAPP =====
+        document.getElementById('whatsapp').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) {
+                value = value.slice(0, 11);
+            }
+            if (value.length > 2) {
+                value = value.slice(0, 2) + ' ' + value.slice(2);
+            }
+            if (value.length > 8) {
+                value = value.slice(0, 8) + '-' + value.slice(8);
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>

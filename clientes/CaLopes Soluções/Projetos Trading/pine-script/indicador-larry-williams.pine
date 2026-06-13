@@ -168,41 +168,40 @@ plot(show_ema50 ? ema50 : na, "EMA 50", color=color_ema50, linewidth=2)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 // Setup 9.1
-if show_setup91
-    if setup91_long
-        label.new(bar_index, high + 30 * syminfo.mintick, "SETUP 9.1",
-                  color=color.new(#00FF00, 100), textcolor=#00FF00, style=label.style_label_down, size=size.small)
-        arrow_long_1 = ta.valuewhen(setup91_long, close, 0)
-    if setup91_short
-        label.new(bar_index, low - 30 * syminfo.mintick, "SETUP 9.1",
-                  color=color.new(#FF0000, 100), textcolor=#FF0000, style=label.style_label_up, size=size.small)
+if show_setup91 and setup91_long
+    label.new(bar_index, high + 30 * syminfo.mintick, "SETUP 9.1",
+              color=color.new(#00FF00, 100), textcolor=#00FF00, style=label.style_label_down, size=size.small)
+
+if show_setup91 and setup91_short
+    label.new(bar_index, low - 30 * syminfo.mintick, "SETUP 9.1",
+              color=color.new(#FF0000, 100), textcolor=#FF0000, style=label.style_label_up, size=size.small)
 
 // Setup 9.2
-if show_setup92
-    if setup92_long
-        label.new(bar_index, high + 50 * syminfo.mintick, "SETUP 9.2",
-                  color=color.new(#00FF00, 100), textcolor=#00FF00, style=label.style_label_down, size=size.small)
-    if setup92_short
-        label.new(bar_index, low - 50 * syminfo.mintick, "SETUP 9.2",
-                  color=color.new(#FF0000, 100), textcolor=#FF0000, style=label.style_label_up, size=size.small)
+if show_setup92 and setup92_long
+    label.new(bar_index, high + 50 * syminfo.mintick, "SETUP 9.2",
+              color=color.new(#00FF00, 100), textcolor=#00FF00, style=label.style_label_down, size=size.small)
+
+if show_setup92 and setup92_short
+    label.new(bar_index, low - 50 * syminfo.mintick, "SETUP 9.2",
+              color=color.new(#FF0000, 100), textcolor=#FF0000, style=label.style_label_up, size=size.small)
 
 // Setup 9.3
-if show_setup93
-    if setup93_long
-        label.new(bar_index, high + 70 * syminfo.mintick, "SETUP 9.3",
-                  color=color.new(#00FF00, 100), textcolor=#00FF00, style=label.style_label_down, size=size.small)
-    if setup93_short
-        label.new(bar_index, low - 70 * syminfo.mintick, "SETUP 9.3",
-                  color=color.new(#FF0000, 100), textcolor=#FF0000, style=label.style_label_up, size=size.small)
+if show_setup93 and setup93_long
+    label.new(bar_index, high + 70 * syminfo.mintick, "SETUP 9.3",
+              color=color.new(#00FF00, 100), textcolor=#00FF00, style=label.style_label_down, size=size.small)
+
+if show_setup93 and setup93_short
+    label.new(bar_index, low - 70 * syminfo.mintick, "SETUP 9.3",
+              color=color.new(#FF0000, 100), textcolor=#FF0000, style=label.style_label_up, size=size.small)
 
 // Ponto de Controle
-if show_pc
-    if pc_long
-        label.new(bar_index, high + 10 * syminfo.mintick, "PC",
-                  color=color.new(#FFFF00, 100), textcolor=#FFFF00, style=label.style_label_down, size=size.tiny)
-    if pc_short
-        label.new(bar_index, low - 10 * syminfo.mintick, "PC",
-                  color=color.new(#FFFF00, 100), textcolor=#FFFF00, style=label.style_label_up, size=size.tiny)
+if show_pc and pc_long
+    label.new(bar_index, high + 10 * syminfo.mintick, "PC",
+              color=color.new(#FFFF00, 100), textcolor=#FFFF00, style=label.style_label_down, size=size.tiny)
+
+if show_pc and pc_short
+    label.new(bar_index, low - 10 * syminfo.mintick, "PC",
+              color=color.new(#FFFF00, 100), textcolor=#FFFF00, style=label.style_label_up, size=size.tiny)
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // ALERTAS
