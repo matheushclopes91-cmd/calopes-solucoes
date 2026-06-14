@@ -301,7 +301,13 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo">Ca<span>Lopes</span></a>
+  <a href="#hero" class="nav-logo" style="display: flex; align-items: center; gap: 0.5rem; font-size: 0;">
+    <svg width="32" height="32" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+      <circle cx="32" cy="32" r="30" fill="none" stroke="#00AAFF" stroke-width="2"/>
+      <path d="M24 32l6 6 12-12" fill="none" stroke="#00AAFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.1rem; letter-spacing: -0.5px; color: var(--accent);">Ca<span style="color: white;">Lopes</span></span>
+  </a>
   <ul>
     <li><a href="#problema">O problema</a></li>
     <li><a href="#calculadora">Calculadora</a></li>
