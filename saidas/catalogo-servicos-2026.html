@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Serviços — CaLopes Soluções Inteligentes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f9f9f9;
+        }
+
+        header {
+            background: linear-gradient(135deg, #00A3E0 0%, #0078a4 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #00A3E0;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #00A3E0;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #00A3E0;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .service-card h3 {
+            margin-top: 0;
+        }
+
+        .price {
+            font-size: 1.5em;
+            color: #00A3E0;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .price-period {
+            font-size: 0.9em;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .features li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+
+        .features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00A3E0;
+            font-weight: bold;
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .timeline-marker {
+            width: 50px;
+            height: 50px;
+            background: #00A3E0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-right: 20px;
+        }
+
+        .timeline-content h4 {
+            margin: 0 0 8px 0;
+            color: #333;
+        }
+
+        .timeline-content p {
+            margin: 0;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .status-done {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-inprogress {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-pending {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .combo-section {
+            background: linear-gradient(135deg, #f5f5f5 0%, #efefef 100%);
+            border-radius: 8px;
+            padding: 40px;
+            margin: 30px 0;
+        }
+
+        .combo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .combo-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            border: 2px solid #00A3E0;
+            text-align: center;
+        }
+
+        .combo-discount {
+            color: #ff6b6b;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .combo-price {
+            font-size: 2em;
+            color: #00A3E0;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .combo-includes {
+            text-align: left;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .combo-includes li {
+            margin: 8px 0;
+        }
+
+        .internal-notes {
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+            font-size: 0.95em;
+            color: #856404;
+        }
+
+        .internal-notes strong {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        thead {
+            background: #00A3E0;
+            color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pillar-name {
+            font-weight: bold;
+            color: #00A3E0;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        .next-action {
+            background: linear-gradient(135deg, #ffd93d 0%, #ffb81c 100%);
+            color: #333;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            .service-grid, .combo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎯 CaLopes Soluções Inteligentes</h1>
+        <p>Transformar atendimento em vendas para óticas e pequenos negócios locais</p>
+    </header>
+
+    <div class="container">
+        <!-- STATUS INTERNO -->
+        <section>
+            <h2>📊 Status Atual do Projeto</h2>
+
+            <div class="internal-notes">
+                <strong>Data:</strong> 14 de junho de 2026<br>
+                <strong>Fase:</strong> Validação e Tração<br>
+                <strong>Prioridade:</strong> Máquina de Prospecção Semi-Automática<br>
+                <strong>Gargalo:</strong> Prospecção e atração de leads qualificados
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">✓</div>
+                    <div class="timeline-content">
+                        <h4>1. Infraestrutura & Identidade</h4>
+                        <p>Domínio calopes.com, Google Workspace, Email Profissional</p>
+                        <span class="status-badge status-done">Concluído</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h4>2. Automação & Agendamento</h4>
+                        <p>Integração com Google Calendar, Validação do Agente, Testes de Robustez</p>
+                        <span class="status-badge status-inprogress">Em Progresso</span>
+                        <div style="margin-top: 12px; font-size: 0.9em; color: #666;">
+                            <strong>A validar:</strong> Validação de dados do cliente • Tratamento de falhas & fallbacks • Confirmação & lembretes
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h4>3. Modelo de Negócio & Serviços</h4>
+                        <p>Estrutura de soluções e entregáveis com pricing</p>
+                        <span class="status-badge status-inprogress">Em Progresso</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <h4>4. Máquina de Prospecção</h4>
+                        <p>Lead scraping automático, filtro de qualificação, abordagem semi-automática</p>
+                        <span class="status-badge status-pending">Próximo Foco</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ESTRUTURA DE SERVIÇOS -->
+        <section>
+            <h2>🛠️ Pilares de Serviços</h2>
+
+            <h3>1. Websites Profissionais</h3>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>Vitrine Essencial</h3>
+                    <div class="price">€400–600</div>
+                    <p><strong>Duração:</strong> 5–7 dias | <strong>Revisões:</strong> 2 rodadas</p>
+                    <ul class="features">
+                        <li>1 página de apresentação</li>
+                        <li>Logo e identidade visual básica</li>
+                        <li>Formulário de contacto</li>
+                        <li>Otimizado para mobile</li>
+                        <li>Hospedagem 1 ano</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Site Profissional</h3>
+                    <div class="price">€800–1.200</div>
+                    <p><strong>Duração:</strong> 10–14 dias | <strong>Revisões:</strong> 3 rodadas</p>
+                    <ul class="features">
+                        <li>3–5 páginas (home, serviços, sobre, contacto, blog)</li>
+                        <li>Design profissional customizado</li>
+                        <li>SEO básico</li>
+                        <li>Integração com Google Analítics</li>
+                        <li>Hospedagem 1 ano + suporte</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>E-commerce Básico</h3>
+                    <div class="price">€1.500+</div>
+                    <p><strong>Duração:</strong> 20–30 dias | <strong>Revisões:</strong> 4 rodadas</p>
+                    <ul class="features">
+                        <li>5+ páginas + loja integrada</li>
+                        <li>Catálogo de produtos</li>
+                        <li>Carrinho de compras</li>
+                        <li>Gateway de pagamento (Stripe/PayPal)</li>
+                        <li>Hospedagem 1 ano + suporte premium</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>2. Automação de Atendimento</h3>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>Chatbot WhatsApp Simples</h3>
+                    <div class="price">€300–500</div>
+                    <p><strong>Duração:</strong> 3–5 dias | <strong>Manutenção:</strong> Incluída 3 meses</p>
+                    <ul class="features">
+                        <li>Respostas automáticas (FAQ)</li>
+                        <li>Fluxos básicos de atendimento</li>
+                        <li>Integração com WhatsApp Business</li>
+                        <li>Análise de mensagens</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Agendamento Automatizado</h3>
+                    <div class="price">€600–900</div>
+                    <p><strong>Duração:</strong> 7–10 dias | <strong>Manutenção:</strong> Incluída 6 meses</p>
+                    <ul class="features">
+                        <li>Integração com Google Calendar</li>
+                        <li>Confirmação automática de agendamentos</li>
+                        <li>Lembretes 24h e 2h antes</li>
+                        <li>Tratamento de cancelamentos</li>
+                        <li>Validação de dados do cliente</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>CRM Leve + Automações</h3>
+                    <div class="price">€900–1.500</div>
+                    <p><strong>Duração:</strong> 14–21 dias | <strong>Manutenção:</strong> Incluída 1 ano</p>
+                    <ul class="features">
+                        <li>Base de dados de clientes</li>
+                        <li>Histórico de interações</li>
+                        <li>Automações multi-canal</li>
+                        <li>Relatórios de atendimento</li>
+                        <li>Segmentação de leads</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>3. Soluções de IA</h3>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>Copywriting Assistido</h3>
+                    <div class="price">€200–400<span class="price-period">/mês</span></div>
+                    <p><strong>Formato:</strong> Pacote mensal | <strong>Entregas:</strong> 4–8 peças/mês</p>
+                    <ul class="features">
+                        <li>Posts para Instagram/LinkedIn</li>
+                        <li>Scripts de anúncios</li>
+                        <li>Copy de email marketing</li>
+                        <li>Refinamento até 2 rodadas</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Análise de Dados de Cliente</h3>
+                    <div class="price">€400–700<span class="price-period">/mês</span></div>
+                    <p><strong>Formato:</strong> Relatório mensal | <strong>Entregas:</strong> 1 análise aprofundada</p>
+                    <ul class="features">
+                        <li>Padrões de conversão</li>
+                        <li>Segmentação de leads</li>
+                        <li>Recomendações de ação</li>
+                        <li>Dashboards interativos</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Consultor Virtual IA</h3>
+                    <div class="price">€600–1.000<span class="price-period">/mês</span></div>
+                    <p><strong>Formato:</strong> Solução dedicada | <strong>Disponibilidade:</strong> 24/7</p>
+                    <ul class="features">
+                        <li>Qualificação automática de leads</li>
+                        <li>Respostas personalizadas por cliente</li>
+                        <li>Sugestões de vendas em tempo real</li>
+                        <li>Monitoramento contínuo</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- TABELA COMPARATIVA -->
+        <section>
+            <h2>📋 Comparativa Rápida de Serviços</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Serviço</th>
+                        <th>Preço</th>
+                        <th>Duração</th>
+                        <th>Ideal Para</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="pillar-name">🌐 Vitrine Essencial</span></td>
+                        <td>€400–600 (one-time)</td>
+                        <td>5–7 dias</td>
+                        <td>Freelancers, startups, primeiro site</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pillar-name">🌐 Site Profissional</span></td>
+                        <td>€800–1.200 (one-time)</td>
+                        <td>10–14 dias</td>
+                        <td>Pequenos negócios, óticas, consultórios</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pillar-name">🌐 E-commerce Básico</span></td>
+                        <td>€1.500+ (one-time)</td>
+                        <td>20–30 dias</td>
+                        <td>Negócios com venda online</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pillar-name">💬 Chatbot WhatsApp</span></td>
+                        <td>€300–500 (one-time)</td>
+                        <td>3–5 dias</td>
+                        <td>FAQ, primeiro nível de atendimento</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pillar-name">📅 Agendamento Auto</span></td>
+                        <td>€600–900 (one-time)</td>
+                        <td>7–10 dias</td>
+                        <td>Óticas, clínicas, salões, consultórios</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pillar-name">🗂️ CRM + Automações</span></td>
+                        <td>€900–1.500 (one-time)</td>
+                        <td>14–21 dias</td>
+                        <td>Negócios com múltiplos clientes, follow-up</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pillar-name">✍️ Copywriting IA</span></td>
+                        <td>€200–400/mês</td>
+                        <td>Contínuo</td>
+                        <td>Marketing, redes sociais, ads</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pillar-name">📊 Análise de Dados</span></td>
+                        <td>€400–700/mês</td>
+                        <td>Contínuo</td>
+                        <td>Tomada de decisão data-driven</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pillar-name">🤖 Consultor Virtual IA</span></td>
+                        <td>€600–1.000/mês</td>
+                        <td>Contínuo</td>
+                        <td>Lead qualification, vendas 24/7</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- PACOTES COMBO -->
+        <section>
+            <h2>📦 Pacotes Combo (Desconto 15%)</h2>
+
+            <div class="combo-section">
+                <div class="combo-grid">
+                    <div class="combo-card">
+                        <h3>💼 Startup Kit</h3>
+                        <div class="combo-discount">-15% | Economiza ~€165</div>
+                        <div class="combo-price">€950</div>
+                        <p><strong>Duração:</strong> 10–15 dias</p>
+                        <ul class="features combo-includes">
+                            <li>✓ Vitrine Essencial (€400–600)</li>
+                            <li>✓ Chatbot WhatsApp (€300–500)</li>
+                        </ul>
+                    </div>
+
+                    <div class="combo-card">
+                        <h3>🚀 Growth Pack</h3>
+                        <div class="combo-discount">-15% | Economiza ~€425</div>
+                        <div class="combo-price">€2.425</div>
+                        <p><strong>Duração:</strong> 21–28 dias</p>
+                        <ul class="features combo-includes">
+                            <li>✓ Site Profissional (€800–1.200)</li>
+                            <li>✓ Agendamento Automático (€600–900)</li>
+                            <li>✓ Copywriting IA (1º mês incluído)</li>
+                        </ul>
+                    </div>
+
+                    <div class="combo-card">
+                        <h3>🏆 Stack Completo</h3>
+                        <div class="combo-discount">-15% | Economiza ~€810</div>
+                        <div class="combo-price">€4.590</div>
+                        <p><strong>Duração:</strong> 35–45 dias</p>
+                        <ul class="features combo-includes">
+                            <li>✓ Site Profissional (€800–1.200)</li>
+                            <li>✓ Agendamento Automático (€600–900)</li>
+                            <li>✓ CRM + Automações (€900–1.500)</li>
+                            <li>✓ 3 meses suporte premium</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÓXIMOS PASSOS INTERNOS -->
+        <section>
+            <h2>🎯 Próximos Passos (Roadmap Interno)</h2>
+
+            <div class="next-action">
+                ⚠️ <strong>IMEDIATO:</strong> Validar fluxo de Agendamento — dados do cliente, tratamento de erros, confirmação e lembretes. Quando pronto, marcar como done.
+            </div>
+
+            <div class="internal-notes">
+                <strong>Depois de validar automação:</strong><br>
+                1. Homologação completa do fluxo (pedir feedback de um cliente beta)<br>
+                2. Estratégia de lançamento — como comunicar os serviços<br>
+                3. <strong>PRIORIDADE: Máquina de Prospecção</strong> — lead scraping automático + filtro de qualificação + abordagem semi-automática (para resolver o gargalo de prospecção)
+            </div>
+
+            <h3 style="margin-top: 40px;">📈 Métricas de Sucesso</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Marco</th>
+                        <th>Métrica</th>
+                        <th>Target</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Infraestrutura</strong></td>
+                        <td>Domínio, Email, Google Workspace ativos</td>
+                        <td>✓ 100%</td>
+                        <td><span class="status-badge status-done">Concluído</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Automação</strong></td>
+                        <td>Fluxo de agendamento validado + taxa de sucesso >95%</td>
+                        <td>Em validação</td>
+                        <td><span class="status-badge status-inprogress">Em Progresso</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Serviços</strong></td>
+                        <td>Catálogo com preços definido</td>
+                        <td>✓ Este documento</td>
+                        <td><span class="status-badge status-done">Concluído</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Prospecção</strong></td>
+                        <td>10+ leads qualificados/semana com esforço <2h</td>
+                        <td>TBD</td>
+                        <td><span class="status-badge status-pending">Próximo</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- NOTAS INTERNAS -->
+        <section>
+            <h2>📝 Notas Internas (Para Matheus)</h2>
+            <div class="internal-notes">
+                <strong>Preços:</strong> Indicativos para pequenas empresas/óticas em Portugal. Ajustar conforme cliente e complexidade.<br><br>
+
+                <strong>Modelo de entrega:</strong> One-time para websites e automações. Recorrente para serviços de IA e análise.<br><br>
+
+                <strong>Diferenciador:</strong> A automação de agendamento (validação de dados + lembretes + tratamento de erros) é o que separa de concorrentes. Investir tempo nisso agora vai permitir vender mais rápido depois.<br><br>
+
+                <strong>Próxima iteração:</strong> Quando começares a captar clientes, documentar os casos de sucesso. Isso vai ser ouro puro para propostas e marketing.<br><br>
+
+                <strong>Time de um:</strong> Não tenta oferecer tudo. Começa com os 2–3 serviços que dominam melhor e depois expande. Qualidade > quantidade.
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>CaLopes Soluções Inteligentes — Transformar atendimento em vendas</p>
+        <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Última atualização: 14 de junho de 2026</p>
+    </footer>
+</body>
+</html>
